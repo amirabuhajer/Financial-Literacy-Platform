@@ -1,182 +1,231 @@
 /* MyFinancialPathways.css */
 
 body {
-    background-color: #f4f8fb;
-    font-family: 'Arial', sans-serif;
-    color: #333;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .financial-pathways-container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .header {
-    text-align: center;
-    color: #3b7ddd;
-    margin-bottom: 30px;
-  }
-  
-  .header h1 {
-    font-size: 2.5em;
-    margin: 0;
-  }
-  
-  .header h2 {
-    font-size: 1.2em;
-    color: #666;
-    margin: 10px 0;
-  }
-  
-  .main-content {
-    padding: 20px;
-  }
-  
-  .budgeting-section h3,
-  .education-section h3 {
-  font-size: 1.8em;
-  color: #3b7ddd;
-  }
-  .suggestions-section ul, .education-section ul {
-    list-style: none;
-    padding: 0;
-  }
-  .quiz-question, .quiz-results {
-    background-color: #e6f3ff;
-    border-radius: 10px;
-    padding: 15px;
-    margin-top: 15px;
-  }
-  
-  .quiz-option {
-    background-color: #ffcc80;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1em;
-    border-radius: 5px;
-    margin: 5px;
-    cursor: pointer;
-  }
-  .quiz-option:hover {
-    background-color: #ffa726;
-  }
-  
-  .education-section h4, .suggestions-section h4 {
-    color: #ff7043;
-    margin-top: 20px;
-  }
-  
-  .budget-form,
-  .expense-tracker,
-  .budget-summary,
-  .suggestions-section {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #e6f3ff;
-    border-radius: 10px;
-  }
-  
-  .budget-form label,
-  .expense-tracker label {
-    font-weight: bold;
-    color: #333;
-    display: block;
-    margin: 10px 0 5px;
-  }
-  
-  .budget-form input,
-  .expense-tracker input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1em;
-  }
-  
-  .add-expense-button {
-    background-color: #ff8a65;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1em;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .add-expense-button:hover {
-    background-color: #ff7043;
-  }
-  
-  .expense-list ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .expense-list li {
-    padding: 5px 0;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .expense-list li:last-child {
-    border-bottom: none;
-  }
-  
-  .budget-summary p {
-    font-size: 1.1em;
-    color: #333;
-    margin: 5px 0;
-  }
-  
-  .suggestions-section ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .suggestions-section li {
-    background-color: #fff7e6;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 8px;
-  }
-  .expense-emotion {
-    font-weight: bold;
-    margin-left: 10px;
-  }
-  
-  .expense-emotion::before {
-    content: "Emotion: ";
-    font-weight: normal;
-    color: #666;
-  }
-  
-  .expense-emotion[data-emotion="Happy"] {
-    color: #4caf50;
-  }
-  
-  .expense-emotion[data-emotion="Regretful"] {
-    color: #f44336;
-  }
-  
-  .expense-emotion[data-emotion="Necessary"] {
-    color: #3f51b5;
-  }
-  
-  .expense-emotion[data-emotion="Impulsive"] {
-    color: #ff9800;
-  }
-  
-  .footer {
-    text-align: center;
-    font-size: 0.9em;
-    color: #666;
-    padding: 10px;
-    border-top: 1px solid #ddd;
-  }
-  
+  background: linear-gradient(135deg, #e3f0ff, #ffe3e9);
+  font-family: 'Comic Sans MS', sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  background-attachment: fixed;
+}
+
+.financial-pathways-container {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.financial-pathways-container:hover {
+  transform: scale(1.02);
+}
+
+.header {
+  text-align: center;
+  color: #6446ea;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px #f0e6ff;
+}
+
+.header h1 {
+  font-size: 2.4em;
+  margin: 0;
+  color: #6446ea;
+}
+
+.header h2 {
+  font-size: 1.1em;
+  color: #999;
+  margin: 8px 0;
+}
+
+.main-content {
+  padding: 10px;
+}
+
+.budgeting-section h3,
+.education-section h3 {
+  font-size: 1.6em;
+  color: #ff6347;
+  margin-bottom: 10px;
+  text-align: center;
+  text-shadow: 1px 1px #ffe1e1;
+}
+
+.suggestions-section ul,
+.education-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.quiz-question,
+.quiz-results {
+  background-color: #ffefc6;
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.quiz-option {
+  background-color: #ffd580;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 8px;
+  margin: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.quiz-option:hover {
+  background-color: #ffad60;
+  transform: scale(1.05);
+}
+
+.education-section h4,
+.suggestions-section h4 {
+  color: #ff7f50;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.budget-form,
+.expense-tracker,
+.budget-summary,
+.suggestions-section,
+.future-self-section {
+  margin-bottom: 15px;
+  padding: 15px;
+  background-color: #f0f4ff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.budget-form label,
+.expense-tracker label {
+  font-weight: bold;
+  color: #555;
+  display: block;
+  margin: 8px 0 4px;
+}
+
+.budget-form input,
+.expense-tracker input,
+.future-self-section input {
+  width: 100%;
+  padding: 8px;
+  border: 2px solid #d1d8ff;
+  border-radius: 8px;
+  font-size: 1em;
+  margin-bottom: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.budget-form input:focus,
+.expense-tracker input:focus,
+.future-self-section input:focus {
+  border-color: #6446ea;
+  outline: none;
+}
+
+.add-expense-button {
+  background-color: #ff7f7f;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.add-expense-button:hover {
+  background-color: #ff6666;
+  transform: scale(1.05);
+}
+
+.calculate-goal-button {
+  background-color: #50c878;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.calculate-goal-button:hover {
+  background-color: #41b65d;
+  transform: scale(1.05);
+}
+
+.expense-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.expense-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.expense-list li:last-child {
+  border-bottom: none;
+}
+
+.budget-summary p {
+  font-size: 1em;
+  color: #444;
+  margin: 5px 0;
+}
+
+.suggestions-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.suggestions-section li {
+  background-color: #ffe8d1;
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 10px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.suggestions-section li:hover {
+  background-color: #ffd8b8;
+}
+
+.future-self-section h4 {
+  color: #5a73de;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.goal-result {
+  font-size: 1.1em;
+  color: #333;
+  margin-top: 12px;
+  background-color: #e0ffe0;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.footer {
+  text-align: center;
+  font-size: 1em;
+  color: #666;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  margin-top: 20px;
+}

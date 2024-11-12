@@ -10,6 +10,9 @@ function MyFinancialPathways() {
   const [quizStep, setQuizStep] = useState(0);
   const [score, setScore] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
+  const [goalAmount, setGoalAmount] = useState('');
+  const [monthlySavings, setMonthlySavings] = useState('');
+  const [timeToGoal, setTimeToGoal] = useState(null);
 
   // Sample quiz questions
   const quizQuestions = [
@@ -28,7 +31,6 @@ function MyFinancialPathways() {
     }
   };
 
-
   const handleQuizAnswer = (selectedOption) => {
     if (quizQuestions[quizStep].answer === selectedOption) {
       setScore(score + 1);
@@ -41,6 +43,16 @@ function MyFinancialPathways() {
   };
 
   const remainingBalance = income ? parseFloat(income) - totalExpenses : 0;
+
+  // Calculate time to reach goal
+  const calculateTimeToGoal = () => {
+    const goal = parseFloat(goalAmount);
+    const savings = parseFloat(monthlySavings);
+    if (!isNaN(goal) && !isNaN(savings) && savings > 0) {
+      const months = Math.ceil(goal / savings);
+      setTimeToGoal(months);
+    }
+  };
 
   return (
     <div className="financial-pathways-container">
@@ -67,6 +79,32 @@ function MyFinancialPathways() {
               onChange={(e) => setSavingsGoal(e.target.value)}
             />
           </form>
+
+          {/* Future Self Simulation Section */}
+          <section className="future-self-section">
+            <h4>Future Self Simulation</h4>
+            <p>Set a financial goal and see how long it would take to achieve it with consistent monthly savings.</p>
+            <label>Goal Amount (e.g., Vacation, Car):</label>
+            <input
+              type="number"
+              value={goalAmount}
+              onChange={(e) => setGoalAmount(e.target.value)}
+            />
+            <label>Monthly Savings Amount:</label>
+            <input
+              type="number"
+              value={monthlySavings}
+              onChange={(e) => setMonthlySavings(e.target.value)}
+            />
+            <button onClick={calculateTimeToGoal} className="calculate-goal-button">
+              Calculate Time to Goal
+            </button>
+            {timeToGoal !== null && (
+              <p className="goal-result">
+                At a monthly savings of ${monthlySavings}, you’ll reach your goal of ${goalAmount} in approximately {timeToGoal} months.
+              </p>
+            )}
+          </section>
 
           <section className="expense-tracker">
             <h4>Expense Tracker</h4>
@@ -130,14 +168,6 @@ function MyFinancialPathways() {
             <p>Remaining Balance: ${remainingBalance}</p>
             <p>Savings Goal: ${savingsGoal || 0}</p>
           </section>
-          <section className="suggestions-section">
-            <h4>Budgeting Suggestions</h4>
-            <ul>
-              <li>💡 Try reducing non-essential expenses if your balance is low.</li>
-              <li>💰 Set aside a small amount for emergencies.</li>
-              <li>📈 If under budget, aim for a higher savings goal!</li>
-            </ul>
-          </section>
         </section>
 
         {/* Education Section */}
@@ -149,23 +179,25 @@ function MyFinancialPathways() {
             <li>✨ Prioritize essential expenses like rent, bills, and food.</li>
             <li>✨ Set a monthly savings goal to build a financial cushion.</li>
           </ul>
-          <h4>Interactive Quiz</h4>
-          {quizCompleted ? (
-            <div className="quiz-results">
-              <p>Quiz Completed! 🎉 You scored {score} out of {quizQuestions.length}!</p>
-            </div>
-          ) : (
-            <div className="quiz-question">
-              <p>{quizQuestions[quizStep].question}</p>
-              {quizQuestions[quizStep].options.map((option, index) => (
-                <button key={index} onClick={() => handleQuizAnswer(option)} className="quiz-option">
-                  {option}
-                </button>
-              ))}
-            </div>
-          )}
-        </section>
-      </main>
+  
+        <h4>Interactive Quiz</h4>
+        {quizCompleted ? (
+          <div className="quiz-results">
+            <p>Quiz Completed! 🎉 You scored {score} out of {quizQuestions.length}!</p>
+          </div>
+        ) : (
+          <div className="quiz-question">
+            <p>{quizQuestions[quizStep].question}</p>
+            {quizQuestions[quizStep].options.map((option, index) => (
+              <button key={index} onClick={() => handleQuizAnswer(option)} className="quiz-option">
+                {option}
+            </button>
+          ))}
+        </div>
+      )}
+  </section>
+
+</main>
 
       <footer className="footer">
         <p>© 2024 My Financial Pathways - Empowering your financial journey for the ones to come.</p>
