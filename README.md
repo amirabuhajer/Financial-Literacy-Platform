@@ -1,6 +1,3 @@
-
-
-```markdown
 # My Financial Pathways: A Personalized, Inclusive Financial Literacy Platform
 
 Welcome to **My Financial Pathways**! This is a unique financial literacy platform aimed at educating users about budgeting and managing expenses. Our goal is to provide an engaging, inclusive platform that caters to users from diverse backgrounds and experiences.
