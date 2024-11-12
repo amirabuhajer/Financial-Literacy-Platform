@@ -86,25 +86,16 @@ This command will open the application in your default web browser. If it doesnâ
 
 If you'd like to contribute to this project, please follow these steps:
 
-1. **Fork the repository** on GitHub.
-2. **Clone your forked repository** to your local machine:
-   ```bash
-   git clone https://github.com/yourusername/your-forked-repository.git
-   ```
-3. **Create a new branch** for your feature or bugfix:
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-4. **Make your changes** and commit them with a descriptive message:
+1. **Make your changes** and commit them with a descriptive message:
    ```bash
    git add .
    git commit -m "Add a detailed description of what you changed"
    ```
-5. **Push your changes** to your forked repository:
+2. **Push your changes** to your forked repository:
    ```bash
    git push origin feature/your-feature-name
    ```
-6. **Submit a pull request** to the original repository.
+3. **Submit a pull request** to the original repository.
 
 Please ensure your code follows the coding standards and conventions used in this project.
 
