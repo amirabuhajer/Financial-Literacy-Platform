@@ -52,7 +52,7 @@ To get the project running on your local machine, follow these steps:
 
 3. Navigate into the project directory:
    ```bash
-   cd budgeting-tool
+   cd Financial-Literacy-Platform
    ```
 
 ### Install Dependencies
