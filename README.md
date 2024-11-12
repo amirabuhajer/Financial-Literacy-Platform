@@ -91,9 +91,9 @@ If you'd like to contribute to this project, please follow these steps:
    git add .
    git commit -m "Add a detailed description of what you changed"
    ```
-2. **Push your changes** to your forked repository:
+2. **Push your changes** to your repository:
    ```bash
-   git push origin feature/your-feature-name
+   git push origin
    ```
 3. **Submit a pull request** to the original repository.
 
