@@ -1,0 +1,275 @@
+/* SavingsAndInvestments.css */
+
+body {
+    background: linear-gradient(135deg, #e3f0ff, #ffe3e9);
+    font-family: 'Comic Sans MS', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-attachment: fixed;
+  }
+  
+  .savings-investments-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .savings-investments-container:hover {
+    transform: scale(1.02);
+  }
+  
+  .header {
+    text-align: center;
+    color: #6446ea;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px #f0e6ff;
+  }
+  
+  .header h1 {
+    font-size: 2.4em;
+    margin: 0;
+    color: #6446ea;
+  }
+  
+  .header h2 {
+    font-size: 1.1em;
+    color: #999;
+    margin: 8px 0;
+  }
+  
+  .navbar {
+    background-color: #6446ea;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .navbar-links {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .navbar-links li {
+    display: inline;
+  }
+  
+  .navbar-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-links a:hover {
+    color: #ffdd57;
+  }
+  
+  .main-content {
+    padding: 10px;
+  }
+  
+  .education-section {
+    background-color: #f0f4ff;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .education-section h3 {
+    text-align: center;
+    color: #ff6347;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px #ffe1e1;
+  }
+  
+  .videos {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+  }
+  
+  iframe {
+    width: 100%;
+    height: 315px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tips-section {
+    background-color: #ffefc6;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .tips-section h3 {
+    text-align: center;
+    color: #ff7f50;
+    margin-bottom: 10px;
+  }
+  
+  .tips-section ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+  
+  .tips-section li {
+    margin-bottom: 8px;
+  }
+  
+  .calculator-section {
+    background-color: #e8f5e9;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .calculator-section h3 {
+    text-align: center;
+    color: #50c878;
+    margin-bottom: 15px;
+  }
+  
+  .calculator-form label {
+    font-weight: bold;
+    color: #555;
+    display: block;
+    margin: 8px 0 4px;
+  }
+  
+  .calculator-form input {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #d1d8ff;
+    border-radius: 8px;
+    font-size: 1em;
+    margin-bottom: 8px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .calculator-form input:focus {
+    border-color: #6446ea;
+    outline: none;
+  }
+  
+  .calculate-button {
+    background-color: #50c878;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+  }
+  
+  .calculate-button:hover {
+    background-color: #41b65d;
+    transform: scale(1.05);
+  }
+  
+  .future-value-result {
+    margin-top: 15px;
+    background-color: #e0ffe0;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .stock-simulation-section {
+    background-color: #fff3e0;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stock-simulation-section h3 {
+    text-align: center;
+    color: #ffb74d;
+    margin-bottom: 15px;
+  }
+  
+  .investment-form label {
+    font-weight: bold;
+    color: #555;
+    display: block;
+    margin: 8px 0 4px;
+  }
+  
+  .investment-form input {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #d1d8ff;
+    border-radius: 8px;
+    font-size: 1em;
+    margin-bottom: 8px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .investment-form input:focus {
+    border-color: #6446ea;
+    outline: none;
+  }
+  
+  .buy-stock-button {
+    background-color: #ffa500;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+  }
+  
+  .buy-stock-button:hover {
+    background-color: #ff8c00;
+    transform: scale(1.05);
+  }
+  
+  .portfolio {
+    margin-top: 15px;
+  }
+  
+  .portfolio h4 {
+    color: #ff8c00;
+    text-align: center;
+  }
+  
+  .portfolio ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+  }
+  
+  .portfolio li {
+    background-color: #fff8e1;
+    padding: 10px;
+    margin: 6px 0;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .footer {
+    text-align: center;
+    font-size: 1em;
+    color: #666;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+  }
+  

@@ -1,0 +1,179 @@
+/* BudgetingBasics.css */
+
+body {
+    background: linear-gradient(135deg, #e3f0ff, #ffe3e9);
+    font-family: 'Comic Sans MS', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-attachment: fixed;
+  }
+  
+  .budgeting-basics-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .budgeting-basics-container:hover {
+    transform: scale(1.02);
+  }
+  
+  .header {
+    text-align: center;
+    color: #6446ea;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px #f0e6ff;
+  }
+  
+  .header h1 {
+    font-size: 2.4em;
+    margin: 0;
+    color: #6446ea;
+  }
+  
+  .header h2 {
+    font-size: 1.1em;
+    color: #999;
+    margin: 8px 0;
+  }
+  
+  .navbar {
+    background-color: #6446ea;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .navbar-links {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .navbar-links li {
+    margin: 0 10px;
+  }
+  
+  .navbar-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-links a:hover {
+    color: #ffefc6;
+  }
+  
+  .main-content {
+    padding: 10px;
+  }
+  
+  .education-section {
+    background-color: #ffefc6;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .education-section h3 {
+    font-size: 1.6em;
+    color: #ff6347;
+    margin-bottom: 10px;
+    text-align: center;
+    text-shadow: 1px 1px #ffe1e1;
+  }
+  
+  .education-section ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+  
+  .education-section ul li {
+    background-color: #ffe8d1;
+    padding: 10px;
+    margin: 6px 0;
+    border-radius: 10px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .education-section ul li:hover {
+    background-color: #ffd8b8;
+  }
+  
+  .quiz-section {
+    background-color: #e0f4ff;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    text-align: center;
+  }
+  
+  .quiz-question h4 {
+    font-size: 1.4em;
+    color: #5a73de;
+    margin-bottom: 10px;
+  }
+  
+  .quiz-question p {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .quiz-option {
+    background-color: #ffd580;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 8px;
+    margin: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+  }
+  
+  .quiz-option:hover {
+    background-color: #ffad60;
+    transform: scale(1.05);
+  }
+  
+  .quiz-results {
+    background-color: #e0ffe0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    text-align: center;
+  }
+  
+  .quiz-results h4 {
+    font-size: 1.6em;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .quiz-results p {
+    font-size: 1.2em;
+    color: #444;
+  }
+  
+  .footer {
+    text-align: center;
+    font-size: 1em;
+    color: #666;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+  }
+  
