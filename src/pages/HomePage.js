@@ -5,6 +5,7 @@ import { FaPiggyBank, FaChartLine, FaBook } from 'react-icons/fa';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from "firebase/analytics";
+import { motion } from 'framer-motion';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCug7bVevo1BM2JMUPW2hfuPaun8y48gjQ",
@@ -32,7 +33,7 @@ function HomePage() {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       console.log('User signed up:', userCredential.user);
       alert('Sign-up successful!');
-      navigate('/user-info');
+      navigate('/dashboard');
     } catch (error) {
       console.error('Error signing up:', error.message);
       alert('Error signing up: ' + error.message);
@@ -70,6 +71,19 @@ function HomePage() {
       </header>
 
       <main className="main-content">
+        {/* Call to Action Section at the Top */}
+        <motion.section 
+          className="call-to-action-section"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h3>Ready to Take Charge of Your Financial Well-being?</h3>
+          <p>Join us today and start making informed, confident decisions about your finances.</p>
+          <button className="sign-up-button" onClick={() => setIsSignUpVisible(true)}>Sign Up Now</button>
+          <button className="login-button" onClick={() => setIsLoginVisible(true)}>Login</button>
+        </motion.section>
+
         {/* Introduction Section */}
         <section className="introduction-section">
           <h2>Welcome to Your Personalized Financial Education Platform</h2>
@@ -79,38 +93,47 @@ function HomePage() {
         {/* Features Section */}
         <section className="features-section">
           <div className="features-list">
-            <div className="feature-item">
+            <motion.div 
+              className="feature-item"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               <FaPiggyBank size={50} color="#1E90FF" />
               <h3>Budgeting Basics</h3>
               <p>Master the art of budgeting and learn how to manage your finances effectively.</p>
               <Link to="/budgeting-basics" className="feature-link">Learn More</Link>
-            </div>
-            <div className="feature-item">
+            </motion.div>
+            <motion.div 
+              className="feature-item"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               <FaChartLine size={50} color="#1E90FF" />
               <h3>Savings & Investments</h3>
               <p>Discover the power of saving and investing to grow your wealth over time.</p>
               <Link to="/savings-and-investments" className="feature-link">Learn More</Link>
-            </div>
-            <div className="feature-item">
+            </motion.div>
+            <motion.div 
+              className="feature-item"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               <FaBook size={50} color="#1E90FF" />
               <h3>Debt Management</h3>
               <p>Understand how to manage debt effectively and regain control of your finances.</p>
               <Link to="/debt-management" className="feature-link">Learn More</Link>
-            </div>
+            </motion.div>
           </div>
-        </section>
-
-        {/* Call to Action Section */}
-        <section className="call-to-action-section">
-          <h3>Ready to Take Charge of Your Financial Well-being?</h3>
-          <p>Join us today and start making informed, confident decisions about your finances. Together, we’ll simplify your financial journey, one step at a time.</p>
-          <button className="sign-up-button" onClick={() => setIsSignUpVisible(true)}>Sign Up Now</button>
-          <button className="sign-up-button" onClick={() => setIsLoginVisible(true)}>Login</button>
         </section>
 
         {/* Sign Up / Login Popup Section */}
         {isSignUpVisible && (
-          <div className="auth-popup">
+          <motion.div 
+            className="auth-popup"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
             <div className="auth-popup-content">
               <h3>Sign Up</h3>
               <input
@@ -128,11 +151,16 @@ function HomePage() {
               <button onClick={handleSignUp} className="auth-button">Sign Up</button>
               <button onClick={() => setIsSignUpVisible(false)} className="close-popup-button">Close</button>
             </div>
-          </div>
+          </motion.div>
         )}
 
         {isLoginVisible && (
-          <div className="auth-popup">
+          <motion.div 
+            className="auth-popup"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
             <div className="auth-popup-content">
               <h3>Login</h3>
               <input
@@ -150,7 +178,7 @@ function HomePage() {
               <button onClick={handleSignIn} className="auth-button">Login</button>
               <button onClick={() => setIsLoginVisible(false)} className="close-popup-button">Close</button>
             </div>
-          </div>
+          </motion.div>
         )}
       </main>
 

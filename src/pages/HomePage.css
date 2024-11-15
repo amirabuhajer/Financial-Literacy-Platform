@@ -1,6 +1,7 @@
 /* HomePage.css */
 
 body {
+  background-color: #1E90FF;
   background: linear-gradient(135deg, #e3f0ff, #ffe3e9);
   font-family: 'Comic Sans MS', sans-serif;
   color: #333;
@@ -17,22 +18,34 @@ body {
   border-radius: 15px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 .header {
   text-align: center;
   color: #1E90FF;
   margin-bottom: 20px;
+  animation: fadeInDown 1s ease;
+}
+
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-50px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 .header h1 {
-  font-size: 2.4em;
+  font-size: 2.8em;
   margin: 0;
   color: #1E90FF;
 }
 
 .header h2 {
-  font-size: 1.3em;
+  font-size: 1.5em;
   color: #A9A9A9;
   margin: 10px 0;
 }
@@ -43,6 +56,7 @@ body {
   border-radius: 10px;
   text-align: center;
   margin-bottom: 20px;
+  animation: fadeIn 1s ease;
 }
 
 .navbar-links {
@@ -76,6 +90,7 @@ body {
   padding: 20px;
   background-color: #F5F5F5;
   border-radius: 15px;
+  animation: fadeIn 1.2s ease;
 }
 
 .features-section {
@@ -86,6 +101,7 @@ body {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  animation: fadeIn 1.4s ease;
 }
 
 .feature-item {
@@ -104,7 +120,7 @@ body {
 }
 
 .feature-item h3 {
-  font-size: 1.5em;
+  font-size: 1.7em;
   color: #1E90FF;
   margin-bottom: 10px;
 }
@@ -126,18 +142,27 @@ body {
 }
 
 .call-to-action-section {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: #1E90FF;
-  padding: 30px;
-  border-radius: 15px;
   color: #ffffff;
+  padding: 40px;
+  border-radius: 15px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  width: 90%;
+  max-width: 800px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
 }
 
 .sign-up-button {
   background-color: #FFD700;
-  color: #333;
-  border: none;
   padding: 15px 30px;
   font-size: 1.2em;
   border-radius: 10px;
@@ -152,6 +177,23 @@ body {
   transform: scale(1.05);
 }
 
+.login-button {
+  background-color: #FFD700;
+  color: #000;
+  border: 2px solid #000;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+  margin-top: 20px;
+}
+
+.login-button:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+}
+
 .auth-popup {
   position: fixed;
   top: 0;
@@ -163,6 +205,7 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  animation: fadeIn 0.5s ease;
 }
 
 .auth-popup-content {
@@ -173,6 +216,13 @@ body {
   text-align: center;
   width: 90%;
   max-width: 400px;
+  animation: bounceIn 0.8s ease;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
 }
 
 .auth-popup-content h3 {
