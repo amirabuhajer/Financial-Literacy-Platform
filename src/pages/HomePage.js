@@ -1,9 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './HomePage.css';
 import { FaPiggyBank, FaChartLine, FaBook } from 'react-icons/fa';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from "firebase/analytics";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCug7bVevo1BM2JMUPW2hfuPaun8y48gjQ",
+  authDomain: "financial-literacy-platform.firebaseapp.com",
+  projectId: "financial-literacy-platform",
+  storageBucket: "financial-literacy-platform.firebasestorage.app",
+  messagingSenderId: "398997944222",
+  appId: "1:398997944222:web:75bf096e6eb61644fb088f",
+  measurementId: "G-LND62GTE2P"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const analytics = getAnalytics(app);
 
 function HomePage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isSignUpVisible, setIsSignUpVisible] = useState(false);
+
+  const handleSignUp = async () => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      console.log('User signed up:', userCredential.user);
+      alert('Sign-up successful!');
+    } catch (error) {
+      console.error('Error signing up:', error.message);
+      alert('Error signing up: ' + error.message);
+    }
+  };
+
+  const handleSignIn = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log('User signed in:', userCredential.user);
+      alert('Sign-in successful!');
+    } catch (error) {
+      console.error('Error signing in:', error.message);
+      alert('Error signing in: ' + error.message);
+    }
+  };
+
   return (
     <div className="homepage-container">
       <header className="header">
@@ -57,8 +100,31 @@ function HomePage() {
         <section className="call-to-action-section">
           <h3>Ready to Take Charge of Your Financial Well-being?</h3>
           <p>Join us today and start making informed, confident decisions about your finances. Together, we’ll simplify your financial journey, one step at a time.</p>
-          <button className="sign-up-button">Sign Up Now</button>
+          <button className="sign-up-button" onClick={() => setIsSignUpVisible(true)}>Sign Up Now</button>
         </section>
+
+        {/* Sign Up / Sign In Popup Section */}
+        {isSignUpVisible && (
+          <div className="auth-popup">
+            <div className="auth-popup-content">
+              <h3>Sign Up</h3>
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button onClick={handleSignUp} className="auth-button">Sign Up</button>
+              <button onClick={() => setIsSignUpVisible(false)} className="close-popup-button">Close</button>
+            </div>
+          </div>
+        )}
       </main>
 
       <footer className="footer">

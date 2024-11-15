@@ -159,3 +159,62 @@ body {
   border-top: 1px solid #ddd;
   margin-top: 20px;
 }
+
+.auth-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.auth-popup-content {
+  text-align: center;
+}
+
+.auth-popup input {
+  display: block;
+  width: calc(100% - 20px);
+  margin: 10px auto;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+.auth-button {
+  background-color: #1E90FF;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.auth-button:hover {
+  background-color: #1C86EE;
+  transform: scale(1.05);
+}
+
+.close-popup-button {
+  background-color: #A9A9A9;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.close-popup-button:hover {
+  background-color: #888;
+  transform: scale(1.05);
+}
