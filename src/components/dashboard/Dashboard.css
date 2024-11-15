@@ -71,87 +71,114 @@ body {
 }
 
 .main-content {
-  padding: 20px;
+  text-align: center;
 }
 
 .budgeting-section {
-  text-align: center;
-  background-color: #F5F5F5;
-  padding: 30px;
-  border-radius: 15px;
   margin-bottom: 40px;
+  background-color: #F5F5F5;
+  padding: 20px;
+  border-radius: 15px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.expense-tracker label, .budget-summary p {
-  display: block;
-  font-size: 1.2em;
-  color: #1E90FF;
-  margin-bottom: 10px;
-  text-align: left;
+.expense-tracker {
+  margin-bottom: 30px;
 }
 
-.expense-tracker input, .expense-tracker select {
-  display: block;
-  width: calc(100% - 20px);
-  margin: 10px auto;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+.expense-tracker h4 {
+  font-size: 1.8em;
+  color: #1E90FF;
+  margin-bottom: 15px;
+}
+
+.expense-tracker form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  justify-items: center;
+}
+
+.expense-tracker label {
   font-size: 1.1em;
+  color: #1E90FF;
+}
+
+.expense-tracker input, 
+.expense-tracker select {
+  width: 80%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 1em;
+  margin-bottom: 15px;
+}
+
+.expense-tracker input#expense-category-other {
+  grid-column: span 2;
 }
 
 .add-expense-button {
-  background-color: #1E90FF;
-  color: #ffffff;
+  grid-column: span 2;
+  background-color: #FFD700;
+  color: #333;
   border: none;
-  padding: 10px 20px;
+  padding: 15px 30px;
   font-size: 1.2em;
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .add-expense-button:hover {
-  background-color: #1C86EE;
+  background-color: #FFC300;
   transform: scale(1.05);
 }
 
 .budget-summary {
-  text-align: left;
   margin-top: 30px;
+  padding: 15px;
+  border: 2px solid #1E90FF;
+  border-radius: 15px;
+  background-color: #ffffff;
 }
 
 .budget-summary h4 {
   font-size: 1.5em;
   color: #1E90FF;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
-.alert-message {
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 10px;
-  background-color: #FF6347;
-  color: #ffffff;
+.budget-summary p {
+  font-size: 1.1em;
+  margin: 10px 0;
+  color: #333;
+}
+
+.alert-message h4 {
+  font-size: 1.3em;
+  color: #ff0000;
   font-weight: bold;
 }
 
 .expense-breakdown {
-  text-align: center;
   margin-top: 40px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #F5F5F5;
 }
 
 .expense-breakdown h4 {
-  font-size: 1.5em;
+  font-size: 1.8em;
   color: #1E90FF;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .chart-container {
-  width: 100%;
-  max-width: 600px;
+  width: 60%;
+  height: 60%;
   margin: 0 auto;
 }
 

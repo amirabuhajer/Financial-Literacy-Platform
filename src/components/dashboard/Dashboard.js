@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import './Dashboard.css';
 
@@ -32,6 +32,7 @@ function Dashboard() {
           const userData = userDoc.data();
           setIncome(userData.monthlyIncome || 0);
           setSavingsGoal(userData.monthlySavings || 0);
+          setExpenses(userData.expenses || []);
         }
       }
     };
@@ -45,20 +46,30 @@ function Dashboard() {
 
     if (expenseTotal > income) {
       setAlertMessage('ALERT: Your expenses exceed your income! Consider reducing discretionary spending.');
-    } else if (expenseTotal > savingsGoal) {
-      setAlertMessage('ALERT: You have spent more than your savings goal. Review your expenses.');
+    } else if (remainingBalance <= savingsGoal) {
+      setAlertMessage('ALERT: Your remaining balance is less than or equal to your savings goal. Review your expenses.');
     } else {
       setAlertMessage('');
     }
-  }, [income, savingsGoal, expenses]);
+  }, [income, savingsGoal, expenses, remainingBalance]);
 
-  const handleAddExpense = () => {
+  const handleAddExpense = async () => {
     if (expenseCategory && expenseAmount > 0 && expenseDate && expenseEmotion) {
-      setExpenses([...expenses, { category: expenseCategory, amount: expenseAmount, date: expenseDate, emotion: expenseEmotion }]);
+      const newExpenses = [...expenses, { category: expenseCategory, amount: expenseAmount, date: expenseDate, emotion: expenseEmotion }];
+      setExpenses(newExpenses);
       setExpenseCategory('');
       setExpenseAmount(0);
       setExpenseDate('');
       setExpenseEmotion('');
+
+      const user = auth.currentUser;
+      if (user) {
+        await setDoc(doc(db, 'users', user.uid), {
+          monthlyIncome: income,
+          monthlySavings: savingsGoal,
+          expenses: newExpenses
+        });
+      }
     }
   };
 
@@ -102,7 +113,19 @@ function Dashboard() {
             <h4>Expense Tracker</h4>
             <form onSubmit={(e) => e.preventDefault()}>
               <label htmlFor="expense-category">Expense Category:</label>
-              <input type="text" id="expense-category" value={expenseCategory} onChange={(e) => setExpenseCategory(e.target.value)} placeholder="e.g., Groceries" />
+              <select id="expense-category" value={expenseCategory} onChange={(e) => setExpenseCategory(e.target.value)}>
+                <option value="">Select Category</option>
+                <option value="Rent">Rent</option>
+                <option value="Groceries">Groceries</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Other">Other</option>
+              </select>
+              {expenseCategory === 'Other' && (
+                <input type="text" id="expense-category-other" placeholder="Specify other category" onChange={(e) => setExpenseCategory(e.target.value)} />
+              )}
 
               <label htmlFor="expense-amount">Amount:</label>
               <input type="number" id="expense-amount" value={expenseAmount} onChange={(e) => setExpenseAmount(parseFloat(e.target.value) || 0)} placeholder="Enter amount" />
