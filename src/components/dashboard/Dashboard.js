@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 import './Dashboard.css';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -17,6 +19,24 @@ function Dashboard() {
   const [totalExpenses, setTotalExpenses] = useState(0);
   const [remainingBalance, setRemainingBalance] = useState(0);
   const [alertMessage, setAlertMessage] = useState('');
+
+  const db = getFirestore();
+  const auth = getAuth();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        const userDoc = await getDoc(doc(db, 'users', user.uid));
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          setIncome(userData.monthlyIncome || 0);
+          setSavingsGoal(userData.monthlySavings || 0);
+        }
+      }
+    };
+    fetchUserData();
+  }, [auth, db]);
 
   useEffect(() => {
     const expenseTotal = expenses.reduce((acc, expense) => acc + expense.amount, 0);
@@ -76,13 +96,6 @@ function Dashboard() {
         {/* Budgeting & Expense Management Section */}
         <section className="budgeting-section">
           <h3>Budgeting & Expense Management</h3>
-          <form className="budget-form">
-            <label htmlFor="income">Monthly Income:</label>
-            <input type="number" id="income" value={income} onChange={(e) => setIncome(parseFloat(e.target.value) || 0)} placeholder="Enter your income" />
-
-            <label htmlFor="savings-goal">Savings Goal:</label>
-            <input type="number" id="savings-goal" value={savingsGoal} onChange={(e) => setSavingsGoal(parseFloat(e.target.value) || 0)} placeholder="Enter your savings goal" />
-          </form>
 
           {/* Expense Tracker Section */}
           <section className="expense-tracker">

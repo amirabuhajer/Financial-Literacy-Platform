@@ -1,0 +1,167 @@
+/* UserInfo.css */
+
+.user-info-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 60px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Comic Sans MS', sans-serif;
+    color: #333;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 5px solid #1E90FF;
+  }
+  
+  .user-info-container h1 {
+    font-size: 3em;
+    color: #1E90FF;
+    margin-bottom: 20px;
+  }
+  
+  .user-info-container p {
+    font-size: 1.4em;
+    color: #1E90FF;
+    margin-bottom: 30px;
+  }
+  
+  .user-info-form {
+    display: block;
+    width: 100%;
+  }
+  
+  .user-info-form label {
+    display: block;
+    width: 100%;
+    margin-bottom: 30px;
+    font-size: 1.5em;
+    text-align: left;
+    color: #1E90FF;
+  }
+  
+  .user-info-form select,
+  .user-info-form input[type="checkbox"],
+  .user-info-form input[type="number"] {
+    margin-top: 10px;
+    padding: 15px;
+    border: 1px solid #1E90FF;
+    border-radius: 8px;
+    font-size: 1.2em;
+    margin-right: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    width: 100%;
+  }
+  
+  .user-info-form select:hover,
+  .user-info-form input[type="checkbox"]:hover,
+  .user-info-form input[type="number"]:hover {
+    transform: scale(1.02);
+    border-color: #1E90FF;
+  }
+  
+  .interests-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .interests-options label {
+    width: auto;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+    color: #1E90FF;
+  }
+  
+  .submit-button {
+    background-color: #1E90FF;
+    color: #ffffff;
+    border: none;
+    padding: 25px 50px;
+    font-size: 1.5em;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+    margin-top: 40px;
+  }
+  
+  .submit-button:hover {
+    background-color: #1C86EE;
+    transform: scale(1.05);
+  }
+  
+  .confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.8);
+  }
+  
+  .confetti-message {
+    position: absolute;
+    text-align: center;
+    font-size: 3em;
+    color: #1E90FF;
+    font-weight: bold;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  .user-info-form textarea {
+    width: calc(100% - 30px);
+    padding: 15px;
+    border: 1px solid #1E90FF;
+    border-radius: 8px;
+    font-size: 1.2em;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    margin-top: 10px;
+    resize: vertical;
+    transition: transform 0.3s ease;
+  }
+  
+  .user-info-form textarea:hover {
+    transform: scale(1.02);
+    border-color: #1E90FF;
+  }
+  
+  @media (max-width: 600px) {
+    .user-info-container {
+      padding: 20px;
+    }
+  
+    .user-info-form label {
+      font-size: 1.3em;
+    }
+  
+    .user-info-container h1 {
+      font-size: 2.5em;
+    }
+  
+    .user-info-container p {
+      font-size: 1.2em;
+    }
+  
+    .submit-button {
+      padding: 15px 30px;
+      font-size: 1.2em;
+    }
+  }
+  

@@ -11,6 +11,7 @@ import RewardsShopPage from './pages/RewardsShopPage';
 import VirtualPetPage from './pages/VirtualPetPage';
 import DictionaryPage from './pages/DictionaryPage';
 import LearningHubPage from './pages/LearningHubPage';
+import UserInfo from './pages/UserInfo';
 import './App.css';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/user-info" element={<UserInfo />} />
           <Route path="/DashBoard" element={<Dashboard />} />
           <Route path="/budgeting-basics" element={<BudgetingBasics />} />
           <Route path="/savings-and-investments" element={<SavingsAndInvestments />} />

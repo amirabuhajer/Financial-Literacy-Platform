@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './HomePage.css';
 import { FaPiggyBank, FaChartLine, FaBook } from 'react-icons/fa';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
@@ -24,12 +24,15 @@ function HomePage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSignUpVisible, setIsSignUpVisible] = useState(false);
+  const [isLoginVisible, setIsLoginVisible] = useState(false);
+  const navigate = useNavigate();
 
   const handleSignUp = async () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       console.log('User signed up:', userCredential.user);
       alert('Sign-up successful!');
+      navigate('/user-info');
     } catch (error) {
       console.error('Error signing up:', error.message);
       alert('Error signing up: ' + error.message);
@@ -41,6 +44,7 @@ function HomePage() {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log('User signed in:', userCredential.user);
       alert('Sign-in successful!');
+      navigate('/dashboard');
     } catch (error) {
       console.error('Error signing in:', error.message);
       alert('Error signing in: ' + error.message);
@@ -101,9 +105,10 @@ function HomePage() {
           <h3>Ready to Take Charge of Your Financial Well-being?</h3>
           <p>Join us today and start making informed, confident decisions about your finances. Together, we’ll simplify your financial journey, one step at a time.</p>
           <button className="sign-up-button" onClick={() => setIsSignUpVisible(true)}>Sign Up Now</button>
+          <button className="sign-up-button" onClick={() => setIsLoginVisible(true)}>Login</button>
         </section>
 
-        {/* Sign Up / Sign In Popup Section */}
+        {/* Sign Up / Login Popup Section */}
         {isSignUpVisible && (
           <div className="auth-popup">
             <div className="auth-popup-content">
@@ -122,6 +127,28 @@ function HomePage() {
               />
               <button onClick={handleSignUp} className="auth-button">Sign Up</button>
               <button onClick={() => setIsSignUpVisible(false)} className="close-popup-button">Close</button>
+            </div>
+          </div>
+        )}
+
+        {isLoginVisible && (
+          <div className="auth-popup">
+            <div className="auth-popup-content">
+              <h3>Login</h3>
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button onClick={handleSignIn} className="auth-button">Login</button>
+              <button onClick={() => setIsLoginVisible(false)} className="close-popup-button">Close</button>
             </div>
           </div>
         )}
