@@ -48,7 +48,7 @@ function BudgetingBasics() {
       <header className="header">
         <nav className="navbar">
           <ul className="navbar-links">
-            <li><Link to="/home">Home</Link></li>
+            <li><Link to="/">Home</Link></li>
             <li><Link to="/budgeting-basics">Budgeting Basics</Link></li>
             <li><Link to="/savings-and-investments">Savings & Investments</Link></li>
             <li><Link to="/debt-management">Debt Management</Link></li>

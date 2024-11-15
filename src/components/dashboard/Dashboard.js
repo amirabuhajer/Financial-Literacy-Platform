@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import './Dashboard.css';  // Import the CSS file for styling
+import './Dashboard.css';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -58,7 +58,7 @@ function Dashboard() {
       <header className="header">
         <nav className="navbar">
           <ul className="navbar-links">
-            <li><Link to="/home">Home</Link></li>
+            <li><Link to="/">Home</Link></li>
             <li><Link to="/budgeting-basics">Budgeting Basics</Link></li>
             <li><Link to="/savings-and-investments">Savings & Investments</Link></li>
             <li><Link to="/debt-management">Debt Management</Link></li>
@@ -73,32 +73,6 @@ function Dashboard() {
       </header>
 
       <main className="main-content">
-        {/* Daily Financial Tip Section */}
-        <section className="daily-tip-section">
-          <h3>Daily Financial Tip</h3>
-          <p id="daily-tip">"Pay yourself first. Save a part of your income before you start spending."</p>
-        </section>
-
-        {/* Financial Health Points Display */}
-        <section className="points-section">
-          <h3>Your Financial Health Points: <span id="points">100</span></h3>
-          <button onClick={() => window.location.href = '#rewards-shop'} className="view-rewards-button">
-            View Rewards Shop
-          </button>
-        </section>
-
-        {/* Virtual Pet Summary Section */}
-        <section className="virtual-pet-section">
-          <h3>Your Financial Health Pet</h3>
-          <div className="pet-status">
-            <p>Health: <span id="pet-health">80%</span></p>
-            <p>Happiness: <span id="pet-happiness">90%</span></p>
-          </div>
-          <div className="pet-image">
-            <img src="./images/Virtual-Pet.png" alt="Your virtual pet" />
-          </div>
-        </section>
-
         {/* Budgeting & Expense Management Section */}
         <section className="budgeting-section">
           <h3>Budgeting & Expense Management</h3>

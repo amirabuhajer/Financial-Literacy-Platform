@@ -10,6 +10,7 @@ import ChallengesPage from './pages/ChallengesPage';
 import RewardsShopPage from './pages/RewardsShopPage';
 import VirtualPetPage from './pages/VirtualPetPage';
 import DictionaryPage from './pages/DictionaryPage';
+import LearningHubPage from './pages/LearningHubPage';
 import './App.css';
 
 function App() {
@@ -17,15 +18,16 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/DashBoard" element={<Dashboard />} />
           <Route path="/budgeting-basics" element={<BudgetingBasics />} />
           <Route path="/savings-and-investments" element={<SavingsAndInvestments />} />
           <Route path="/debt-management" element={<DebtManagement />} />
-          <Route path="/home" element={<HomePage />} />
           <Route path="/challenges" element={<ChallengesPage />} />
           <Route path="/rewards-shop" element={<RewardsShopPage />} />
           <Route path="/virtual-pet" element={<VirtualPetPage />} />
           <Route path="/dictionary" element={<DictionaryPage />} />
+          <Route path="/learning-hub" element={<LearningHubPage />} />
         </Routes>
       </div>
     </Router>

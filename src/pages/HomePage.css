@@ -1,167 +1,161 @@
 /* HomePage.css */
 
 body {
-    background: linear-gradient(135deg, #e3f0ff, #ffe3e9);
-    font-family: 'Comic Sans MS', sans-serif;
-    color: #333;
-    margin: 0;
-    padding: 0;
-    background-attachment: fixed;
-  }
-  
-  .homepage-container {
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-  }
-  
-  .homepage-container:hover {
-    transform: scale(1.02);
-  }
-  
-  .header {
-    text-align: center;
-    color: #6446ea;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px #f0e6ff;
-  }
-  
-  .header h1 {
-    font-size: 2.8em;
-    margin: 0;
-    color: #6446ea;
-  }
-  
-  .header h2 {
-    font-size: 1.2em;
-    color: #999;
-    margin: 10px 0;
-  }
-  
-  .navbar {
-    background-color: #6446ea;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .navbar-links {
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .navbar-links li {
-    display: inline;
-  }
-  
-  .navbar-links a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-    transition: color 0.3s ease;
-  }
-  
-  .navbar-links a:hover {
-    color: #ffdf00;
-  }
-  
-  .introduction-section, .features-section, .testimonials-section, .call-to-action-section {
-    margin-bottom: 30px;
-    padding: 20px;
-    background-color: #f9f9ff;
-    border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .features-section h3, .introduction-section h3, .testimonials-section h3, .call-to-action-section h3 {
-    color: #ff6347;
-    text-align: center;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px #ffe1e1;
-  }
-  
-  .features-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  .feature-item {
-    width: 48%;
-    background-color: #ffffff;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-  }
-  
-  .feature-item:hover {
-    transform: scale(1.05);
-  }
-  
-  .feature-item h4 {
-    color: #6446ea;
-    margin-bottom: 10px;
-  }
-  
-  .feature-link {
-    text-decoration: none;
-    color: #ffa500;
-    font-weight: bold;
-    transition: color 0.3s ease;
-  }
-  
-  .feature-link:hover {
-    color: #ff8c00;
-  }
-  
-  .testimonials {
-    text-align: center;
-    font-style: italic;
-  }
-  
-  .testimonials blockquote {
-    margin: 20px 0;
-    padding: 15px;
-    background-color: #fff5f0;
-    border-left: 5px solid #ff6347;
-    border-radius: 10px;
-  }
-  
-  .call-to-action-section {
-    text-align: center;
-  }
-  
-  .sign-up-button {
-    background-color: #50c878;
-    color: #fff;
-    border: none;
-    padding: 15px 30px;
-    font-size: 1.2em;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s;
-  }
-  
-  .sign-up-button:hover {
-    background-color: #41b65d;
-    transform: scale(1.05);
-  }
-  
-  .footer {
-    text-align: center;
-    font-size: 1em;
-    color: #666;
-    padding: 10px;
-    border-top: 1px solid #ddd;
-    margin-top: 20px;
-  }
-  
+  background: linear-gradient(135deg, #e3f0ff, #ffe3e9);
+  font-family: 'Comic Sans MS', sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  background-attachment: fixed;
+}
+
+.homepage-container {
+  max-width: 100%;
+  margin: 0;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.header {
+  text-align: center;
+  color: #1E90FF;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 2.4em;
+  margin: 0;
+  color: #1E90FF;
+}
+
+.header h2 {
+  font-size: 1.3em;
+  color: #A9A9A9;
+  margin: 10px 0;
+}
+
+.navbar {
+  background-color: #1E90FF;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.navbar-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.navbar-links li {
+  margin: 0 15px;
+}
+
+.navbar-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1em;
+  transition: color 0.3s ease;
+}
+
+.navbar-links a:hover {
+  color: #FFD700;
+}
+
+.introduction-section {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #F5F5F5;
+  border-radius: 15px;
+}
+
+.features-section {
+  margin-bottom: 40px;
+}
+
+.features-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+}
+
+.feature-item {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 30%;
+  margin: 10px;
+  transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: scale(1.05);
+}
+
+.feature-item h3 {
+  font-size: 1.5em;
+  color: #1E90FF;
+  margin-bottom: 10px;
+}
+
+.feature-item p {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.feature-link {
+  color: #1E90FF;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.feature-link:hover {
+  color: #FFD700;
+}
+
+.call-to-action-section {
+  text-align: center;
+  background-color: #1E90FF;
+  padding: 30px;
+  border-radius: 15px;
+  color: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sign-up-button {
+  background-color: #FFD700;
+  color: #333;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+  margin-top: 20px;
+}
+
+.sign-up-button:hover {
+  background-color: #FFC300;
+  transform: scale(1.05);
+}
+
+.footer {
+  text-align: center;
+  font-size: 1em;
+  color: #666;
+  padding: 20px;
+  border-top: 1px solid #ddd;
+  margin-top: 20px;
+}
