@@ -161,7 +161,7 @@ body {
   50% { transform: scale(1.02); }
 }
 
-.sign-up-button {
+.sign-up-button, .login-button {
   background-color: #FFD700;
   padding: 15px 30px;
   font-size: 1.2em;
@@ -172,25 +172,8 @@ body {
   margin-right: 10px;
 }
 
-.sign-up-button:hover {
+.sign-up-button:hover, .login-button:hover {
   background-color: #FFC300;
-  transform: scale(1.05);
-}
-
-.login-button {
-  background-color: #FFD700;
-  color: #000;
-  border: 2px solid #000;
-  padding: 15px 30px;
-  font-size: 1.2em;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s;
-  margin-top: 20px;
-}
-
-.login-button:hover {
-  background-color: #f0f0f0;
   transform: scale(1.05);
 }
 
@@ -241,16 +224,19 @@ body {
   font-size: 1.1em;
 }
 
-.auth-button {
-  background-color: #1E90FF;
-  color: #ffffff;
-  border: none;
+.auth-button, .close-popup-button {
   padding: 10px 20px;
   font-size: 1.2em;
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s;
   margin-top: 20px;
+}
+
+.auth-button {
+  background-color: #1E90FF;
+  color: #ffffff;
+  border: none;
 }
 
 .auth-button:hover {
@@ -262,12 +248,6 @@ body {
   background-color: #FF6347;
   color: #ffffff;
   border: none;
-  padding: 10px 20px;
-  font-size: 1.2em;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s;
-  margin-top: 20px;
 }
 
 .close-popup-button:hover {
