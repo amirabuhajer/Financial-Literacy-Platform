@@ -1,99 +1,104 @@
-// BudgetCalculator.js
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './UniversalFinancialStyles.css';
 
 function BudgetCalculator() {
-  const [income, setIncome] = useState(0);
-  const [expenses, setExpenses] = useState([]);
-  const [expenseName, setExpenseName] = useState('');
-  const [expenseAmount, setExpenseAmount] = useState(0);
+  const [monthlyIncome, setMonthlyIncome] = useState(0);
+  const [rent, setRent] = useState(0);
+  const [utilities, setUtilities] = useState(0);
+  const [groceries, setGroceries] = useState(0);
+  const [transportation, setTransportation] = useState(0);
+  const [savings, setSavings] = useState(0);
+  const [otherExpenses, setOtherExpenses] = useState(0);
   const [totalExpenses, setTotalExpenses] = useState(0);
+  const [balance, setBalance] = useState(0);
 
-  const handleAddExpense = () => {
-    const newExpense = { name: expenseName, amount: parseFloat(expenseAmount) };
-    setExpenses([...expenses, newExpense]);
-    setTotalExpenses(totalExpenses + parseFloat(expenseAmount));
-    setExpenseName('');
-    setExpenseAmount(0);
-  };
-
-  const handleCalculate = () => {
-    const totalIncome = parseFloat(income);
-    const remaining = totalIncome - totalExpenses;
-    return remaining;
+  const calculateBudget = () => {
+    const expenses = rent + utilities + groceries + transportation + savings + otherExpenses;
+    setTotalExpenses(expenses);
+    setBalance(monthlyIncome - expenses);
   };
 
   return (
-    <div className="container">
-      <header className="header">
-        <nav className="navbar">
-          <ul className="navbar-links">
-            <li><Link to="/"><i className="fa fa-home"></i> Home</Link></li>
-            <li><Link to="/budgeting-basics"><i className="fa fa-wallet"></i> Budgeting Basics</Link></li>
-            <li><Link to="/financial-tools"><i className="fa fa-tools"></i> Financial Tools</Link></li>
-          </ul>
-        </nav>
-        <h1>Budget Calculator</h1>
-        <h2>Plan Your Income and Expenses Effectively</h2>
-      </header>
+    <div className="budget-calculator">
+      <h1>Monthly Budget Calculator</h1>
+      <h2>Calculate Your Monthly Budget Easily</h2>
 
-      <main className="main-content">
-        <section className="calculator-section">
-          <div className="calculator-form">
-            <label htmlFor="income">Monthly Income ($):</label>
-            <input
-              type="number"
-              id="income"
-              value={income}
-              onChange={(e) => setIncome(parseFloat(e.target.value) || 0)}
-              placeholder="Enter your monthly income"
-            />
+      <form className="budget-form" onSubmit={(e) => e.preventDefault()}>
+        <label htmlFor="monthlyIncome">Monthly Income (CAD):</label>
+        <input
+          type="number"
+          id="monthlyIncome"
+          value={monthlyIncome}
+          onChange={(e) => setMonthlyIncome(parseFloat(e.target.value) || 0)}
+          placeholder="Enter your monthly income"
+        />
 
-            <label htmlFor="expense-name">Expense Name:</label>
-            <input
-              type="text"
-              id="expense-name"
-              value={expenseName}
-              onChange={(e) => setExpenseName(e.target.value)}
-              placeholder="Enter expense name"
-            />
+        <label htmlFor="rent">Rent (CAD):</label>
+        <input
+          type="number"
+          id="rent"
+          value={rent}
+          onChange={(e) => setRent(parseFloat(e.target.value) || 0)}
+          placeholder="Enter your monthly rent"
+        />
 
-            <label htmlFor="expense-amount">Expense Amount ($):</label>
-            <input
-              type="number"
-              id="expense-amount"
-              value={expenseAmount}
-              onChange={(e) => setExpenseAmount(parseFloat(e.target.value) || 0)}
-              placeholder="Enter expense amount"
-            />
+        <label htmlFor="utilities">Utilities (CAD):</label>
+        <input
+          type="number"
+          id="utilities"
+          value={utilities}
+          onChange={(e) => setUtilities(parseFloat(e.target.value) || 0)}
+          placeholder="Enter your monthly utilities"
+        />
 
-            <button type="button" className="button" onClick={handleAddExpense}>
-              Add Expense
-            </button>
-          </div>
+        <label htmlFor="groceries">Groceries (CAD):</label>
+        <input
+          type="number"
+          id="groceries"
+          value={groceries}
+          onChange={(e) => setGroceries(parseFloat(e.target.value) || 0)}
+          placeholder="Enter your monthly grocery expenses"
+        />
 
-          <div className="expense-list">
-            <h3>Expenses</h3>
-            <ul>
-              {expenses.map((expense, index) => (
-                <li key={index} className="card">
-                  {expense.name}: ${expense.amount.toFixed(2)}
-                </li>
-              ))}
-            </ul>
-          </div>
+        <label htmlFor="transportation">Transportation (CAD):</label>
+        <input
+          type="number"
+          id="transportation"
+          value={transportation}
+          onChange={(e) => setTransportation(parseFloat(e.target.value) || 0)}
+          placeholder="Enter your monthly transportation costs"
+        />
 
-          <div className="result">
-            <h3>Remaining Balance</h3>
-            <p>${handleCalculate().toFixed(2)}</p>
-          </div>
-        </section>
-      </main>
+        <label htmlFor="savings">Savings (CAD):</label>
+        <input
+          type="number"
+          id="savings"
+          value={savings}
+          onChange={(e) => setSavings(parseFloat(e.target.value) || 0)}
+          placeholder="Enter your monthly savings"
+        />
 
-      <footer className="footer">
-        <p>© 2024 My Financial Pathways - Empowering your financial journey for the ones to come.</p>
-      </footer>
+        <label htmlFor="otherExpenses">Other Expenses (CAD):</label>
+        <input
+          type="number"
+          id="otherExpenses"
+          value={otherExpenses}
+          onChange={(e) => setOtherExpenses(parseFloat(e.target.value) || 0)}
+          placeholder="Enter other monthly expenses"
+        />
+
+        <button type="button" onClick={calculateBudget} className="calculate-budget-button">
+          Calculate Budget
+        </button>
+      </form>
+
+      {totalExpenses > 0 && (
+        <div className="budget-results">
+          <h3>Total Monthly Expenses: ${totalExpenses.toFixed(2)}</h3>
+          <h3>Remaining Balance: ${balance.toFixed(2)}</h3>
+          {balance < 0 && <p className="warning-message">Warning: You are overspending your budget!</p>}
+        </div>
+      )}
     </div>
   );
 }
