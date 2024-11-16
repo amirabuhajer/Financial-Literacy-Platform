@@ -26,6 +26,7 @@ import ExpenseTracker from './components/educational-modules/ExpenseTracker';
 import FinancialLiteracyQuiz from './components/educational-modules/FinancialLiteracyQuiz';
 import BudgetCalculator from './components/educational-modules/BudgetCalculator';
 import SavingsGoalPlanner from './components/educational-modules/SavingsGoalPlanner';
+import FinancialSimulator from './components/educational-modules/FinancialSimulator';
 
 import './App.css';
 
@@ -59,6 +60,7 @@ function App() {
           <Route path="/financial-literacy-quiz" element={<FinancialLiteracyQuiz />} />
           <Route path="/budget-calculator" element={<BudgetCalculator />} />
           <Route path="/savings-goal-planner" element={<SavingsGoalPlanner />} />
+          <Route path="/financial-simulator" element={<FinancialSimulator />} />
         </Routes>
       </div>
     </Router>

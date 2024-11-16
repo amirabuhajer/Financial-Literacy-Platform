@@ -147,8 +147,8 @@ function LearningHubPage() {
               </Link>
             </li>
             <li>
-              <Link to="/rewards-shop" className={location.pathname === '/rewards-shop' ? 'active' : ''}>
-                <i className="fas fa-store"></i> Rewards Shop
+              <Link to="/financial-simulator" className={location.pathname === '/financial-simulator' ? 'active' : ''}>
+                <i className="FaCalculator"></i> Financial Simulator
               </Link>
             </li>
           </ul>

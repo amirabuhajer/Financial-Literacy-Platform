@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Line } from 'react-chartjs-2';
+import { Link, useNavigate } from 'react-router-dom';
+import './FinancialSimulator.css';
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -168,8 +171,46 @@ const FinancialSimulator = () => {
   };
 
   return (
+
+    
+
     <div>
-      <h1>Financial Simulator</h1>
+     
+     <nav className="navbar">
+          <ul className="navbar-links">
+            <li>
+              <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
+                <i className="fas fa-home"></i> Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/dashboard" className={location.pathname === '/dashboard' ? 'active' : ''}>
+                <i className="fas fa-tachometer-alt"></i> Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link to="/learning-hub" className={location.pathname === '/learning-hub' ? 'active' : ''}>
+                <i className="fas fa-lightbulb"></i> Learning Hub
+              </Link>
+            </li>
+            <li>
+              <Link to="/challenges" className={location.pathname === '/challenges' ? 'active' : ''}>
+                <i className="fas fa-tasks"></i> Challenges
+              </Link>
+            </li>
+            <li>
+              <Link to="/financial-simulator" className={location.pathname === '/financial-simulator' ? 'active' : ''}>
+                <i className="FaCalculator"></i> Financial Simulator
+              </Link>
+            </li>
+            
+          </ul>
+        </nav>
+
+        <h1>Financial Simulator</h1>
+
+        
+
       <div>
         <label>Annual Income: </label>
         <input

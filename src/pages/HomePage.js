@@ -6,6 +6,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } f
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from "firebase/analytics";
 import { motion } from 'framer-motion';
+import { MdCalculator } from 'react-icons/md';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCug7bVevo1BM2JMUPW2hfuPaun8y48gjQ",
@@ -79,10 +80,11 @@ function HomePage() {
               </Link>
             </li>
             <li>
-              <Link to="/rewards-shop" className={location.pathname === '/rewards-shop' ? 'active' : ''}>
-                <i className="fas fa-store"></i> Rewards Shop
+              <Link to="/financial-simulator" className={location.pathname === '/financial-simulator' ? 'active' : ''}>
+                <i className="MdCalculator"></i> Financial Simulator
               </Link>
             </li>
+            
           </ul>
         </nav>
         <h1>My Financial Pathways</h1>

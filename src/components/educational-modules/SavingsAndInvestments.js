@@ -60,7 +60,7 @@ function SavingsAndInvestments() {
               </Link>
             </li>
             <li>
-              <Link to="/avings-and-investments" className={location.pathname === '/savings-and-investments' ? 'active' : ''}>
+              <Link to="/savings-and-investments" className={location.pathname === '/savings-and-investments' ? 'active' : ''}>
                 <i className="fa fa-chart-line"></i> Savings and Investments
               </Link>
             </li>

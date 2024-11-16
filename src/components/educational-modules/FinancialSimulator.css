@@ -1,86 +1,178 @@
-/* Styles for the Financial Simulator Webpage */
-
+/* Global Styles */
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom right, #e0f7fa, #ffebee);
-    color: #333;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #e3f2fd, #ffe0b2);
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: flex-start;
+}
+
+/* Header Styles */
+h1 {
+  margin-top: 40px;
+  font-size: 2rem;
+  color: #1e2a38;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Form and Input Styles */
+label {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-right: 10px;
+  color: #00796b;
+}
+
+input[type="number"],
+input[type="checkbox"] {
+  padding: 10px;
+  margin: 8px 0;
+  border: 2px solid #b0bec5;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 350px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+input[type="number"]:focus {
+  border-color: #00796b;
+  outline: none;
+}
+
+input[type="checkbox"] {
+  margin-top: 5px;
+  width: auto;
+}
+
+button {
+  background-color: #00796b;
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: ##1e90ff;
+  transform: translateY(-3px);
+}
+
+/* Layout for Inputs */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Chart Container */
+.chart-container {
+  margin-top: 30px;
+  width: 90%;
+  max-width: 900px;
+  height: 450px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.simulation-results {
+  margin-top: 40px;
+  width: 90%;
+  max-width: 900px;
+  background-color: #ffffffcc;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar Styles */
+.navbar {
+  width: 100%;
+  background-color: #004d40;
+  padding: 10px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.navbar-links li {
+  display: inline-block;
+}
+
+.navbar-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s ease;
+}
+
+.navbar-links a:hover {
+  background-color: #ffd700;
+  transform: scale(1.05);
+}
+
+.navbar-links a.active {
+  background-color: #ffd700;
+  color: #1e90ff;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: scale(1.1);
+}
+
+/* Error Message */
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 1rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .form-container {
+    width: 95%;
   }
-  
-  h1 {
-    margin-top: 20px;
-    color: #37474f;
-  }
-  
-  label {
-    font-weight: bold;
-    margin-right: 10px;
-  }
-  
-  select,
-  input[type="number"] {
-    padding: 5px;
-    margin: 10px 0;
-    border: 1px solid #b0bec5;
-    border-radius: 5px;
-    font-size: 1rem;
-  }
-  
+
   button {
-    background-color: #00796b;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s;
-  }
-  
-  button:hover {
-    background-color: #004d40;
-  }
-  
-  .simulation-results {
-    margin-top: 20px;
-    width: 80%;
-    max-width: 800px;
-    background: #ffffffcc;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .chart-container {
-    margin-top: 20px;
     width: 100%;
-    height: 400px;
   }
-  
-  .result-item {
-    margin-top: 15px;
-    padding: 10px;
-    border-bottom: 1px solid #b0bec5;
+}
+
+@media (max-width: 480px) {
+  .navbar-links a {
+    font-size: 1rem;
   }
-  
-  .error-message {
-    color: red;
-    font-weight: bold;
-    margin-top: 20px;
+
+  h1 {
+    font-size: 1.6rem;
   }
-  
-  @media (max-width: 600px) {
-    .simulation-results {
-      width: 95%;
-    }
-    button {
-      width: 100%;
-    }
-  }
-  
+}

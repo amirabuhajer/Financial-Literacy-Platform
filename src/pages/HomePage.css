@@ -19,6 +19,35 @@ body {
   animation: fadeIn 1s ease;
 }
 
+.call-to-action-section {
+  margin-bottom: 50px;
+  padding: 50px;
+  background: linear-gradient(135deg, #1E90FF, #00BFFF); /* Blue gradient */
+  color: #ffffff; /* White text for contrast */
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.call-to-action-section h3 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.call-to-action-section button {
+  font-size: 1.1em;
+  padding: 15px 35px;
+  margin: 10px;
+  background-color: #FFD700; /* Keep button color as-is, or adjust */
+  color: #1E90FF;
+  border-radius: 8px;
+}
+
+.call-to-action-section button:hover {
+  background-color: #FFC300; /* Adjust for hover if necessary */
+  transform: scale(1.05);
+}
+
 @keyframes fadeIn {
   0% { opacity: 0; transform: translateY(-20px); }
   100% { opacity: 1; transform: translateY(0); }
@@ -169,6 +198,7 @@ body {
   color: #333;
   margin-bottom: 15px;
 }
+
 
 .feature-link {
   color: #1E90FF;
