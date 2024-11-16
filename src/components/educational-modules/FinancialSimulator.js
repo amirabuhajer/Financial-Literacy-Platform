@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import { Link, useNavigate } from 'react-router-dom';
-import './FinancialSimulator.css';
-
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,6 +10,9 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { saveAs } from 'file-saver';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 ChartJS.register(
   CategoryScale,
@@ -28,90 +28,80 @@ const FinancialSimulator = () => {
   const [selectedYear, setSelectedYear] = useState(2021);
   const [endYear, setEndYear] = useState(2031);
   const [annualIncome, setAnnualIncome] = useState(0);
-  const [monthlyInvestment, setMonthlyInvestment] = useState(0);
+  const [yearlyInvestment, setYearlyInvestment] = useState(0);
+  const [investAnnually, setInvestAnnually] = useState(false);
   const [reduceExpenses, setReduceExpenses] = useState(0);
   const [switchToRenting, setSwitchToRenting] = useState(false);
   const [savingsAmount, setSavingsAmount] = useState(0);
-  const [monthlyMortgage, setMonthlyMortgage] = useState(0);
   const [fixedExpenses, setFixedExpenses] = useState(0);
   const [nonEssentialExpenses, setNonEssentialExpenses] = useState(0);
   const [houseWorth, setHouseWorth] = useState(0);
+  const [monthlyMortgage, setMonthlyMortgage] = useState(0);
   const [simulationResults, setSimulationResults] = useState([]);
   const [events, setEvents] = useState([]);
+  const [alternativeScenarios, setAlternativeScenarios] = useState([]);
 
-  // Growth factors
-  const growthRates = {
-    annualIncomeGrowth: 3.153304 / 100, // Annual income growth
-    fixedExpensesGrowth: 3.97 / 100, // Fixed yearly expenses growth
-    nonEssentialExpensesGrowth: 3.37 / 100, // Non-essential monthly expenses growth
-    savingsInterestRate: 0.94 / 100, // Savings interest rate
-    stockAndMutualFundRate: 25 / 100, // Annual stock and mutual funds growth
-    houseWorthGrowthRate: 6.42 / 100, // Annual house worth growth
-  };
+  // Growth rates used in the simulation for various financial factors
+const growthRates = {
+    annualIncomeGrowth: 3.153304 / 100, // Annual growth rate for income
+    fixedExpensesGrowth: 3.97 / 100, // Annual growth rate for fixed expenses
+    nonEssentialExpensesGrowth: 3.37 / 100, // Annual growth rate for non-essential expenses
+    savingsInterestRate: 0.94 / 100, // Interest rate for savings
+    stockAndMutualFundRate: 25 / 100, // Growth rate for stocks and mutual funds
+    houseWorthGrowthRate: 6.42 / 100, // Annual growth rate for house value
+};
 
-  const runSimulation = () => {
+  // Function to run the financial simulation based on user inputs and growth rates
+const runSimulation = () => {
     const results = [];
     let currentAnnualIncome = annualIncome;
-    let currentFixedExpenses = fixedExpenses; // Fixed expenses are already annualized
-    let currentNonEssentialExpenses = nonEssentialExpenses * 12; // Convert monthly to annual
+    let currentFixedExpenses = fixedExpenses;
+    let currentNonEssentialExpenses = nonEssentialExpenses;
     let currentHouseWorth = houseWorth;
-    let rentExpenses = 0;
     let totalSavings = savingsAmount;
-    let totalStockInvestment = monthlyInvestment * 12; // Total annual investment in stocks
-  
+    let totalStockInvestment = yearlyInvestment;
+
     for (let year = selectedYear; year <= endYear; year++) {
       const currentYearEvents = events.filter((event) => event.year === year);
       currentYearEvents.forEach((event) => {
         switch (event.type) {
-          case 'payraise':
-            currentAnnualIncome *= 1 + event.percentage / 100;
-            break;
-          case 'new_job':
+          case 'income_change':
             currentAnnualIncome = event.newIncome;
             break;
-          case 'job_loss':
-            currentAnnualIncome *= 1 - event.percentage / 100;
+          case 'expense_change':
+            currentFixedExpenses = event.newFixedExpenses;
+            currentNonEssentialExpenses = event.newNonEssentialExpenses;
             break;
-          case 'better_job':
-            currentAnnualIncome *= 1 + event.percentage / 100;
+          case 'house_change':
+            currentHouseWorth = event.newHouseWorth;
+            monthlyMortgage = event.newMonthlyMortgage;
             break;
           default:
             break;
         }
       });
-  
-      // Apply annual growth rates
-      currentAnnualIncome *= 1 + growthRates.annualIncomeGrowth;
+
+      currentAnnualIncome = Math.max(0, currentAnnualIncome * (1 + growthRates.annualIncomeGrowth));
       currentFixedExpenses *= 1 + growthRates.fixedExpensesGrowth;
       currentNonEssentialExpenses *= 1 + growthRates.nonEssentialExpensesGrowth;
-      rentExpenses *= 1 + growthRates.fixedExpensesGrowth; // Assume rent grows similarly to fixed expenses
       currentHouseWorth *= 1 + growthRates.houseWorthGrowthRate;
-  
-      // Add user-specified savings amount every year
-      totalSavings += savingsAmount;
+
+      if (investAnnually) {
+        totalSavings += savingsAmount;
+      }
       totalSavings *= 1 + growthRates.savingsInterestRate;
-  
-      // Stock and mutual fund investment increases by 25% annually
+
       totalStockInvestment *= 1 + growthRates.stockAndMutualFundRate;
-  
-      // Calculate adjusted non-essential expenses based on user input
+
       const adjustedNonEssentialExpenses =
         currentNonEssentialExpenses * (1 - reduceExpenses / 100);
-  
-      // Adjust for renting
-      const adjustedRentExpenses = switchToRenting
-        ? rentExpenses * 0.9 // Reduced rent for renting scenario
-        : rentExpenses;
-  
-      // Total annual expenses calculation
       const totalExpenses =
         currentFixedExpenses +
         adjustedNonEssentialExpenses +
-        adjustedRentExpenses +
-        monthlyMortgage * 12; // Convert monthly mortgage to annual
-  
+        monthlyMortgage * 12;
+
       const disposableIncome = currentAnnualIncome - totalExpenses;
-  
+
       results.push({
         year,
         annual_income: currentAnnualIncome,
@@ -119,16 +109,149 @@ const FinancialSimulator = () => {
         disposable_income: disposableIncome,
         stock_and_mutual_funds_value: totalStockInvestment,
         house_worth: currentHouseWorth,
-        monthly_mortgage: monthlyMortgage,
         total_savings: totalSavings,
       });
     }
-  
-    setSimulationResults(results);
-  };
-  
 
-  const chartData = {
+    setSimulationResults(results);
+    generateAlternativeScenarios(results);
+  };
+
+  // Function to generate alternative scenarios based on user-defined events
+// e.g., what would happen if certain financial changes did not occur
+const generateAlternativeScenarios = (baseResults) => {
+    const scenarios = [];
+
+    events.forEach((event) => {
+      if (event.type === 'income_change') {
+        const modifiedResults = baseResults.map((result) => {
+          if (result.year >= event.year) {
+            return {
+              ...result,
+              annual_income: event.newIncome, // Keep the income fixed for the alternative scenario
+            };
+          }
+          return result;
+        });
+        scenarios.push({
+          description: `If the income did not increase in Year ${event.year}...`,
+          results: modifiedResults,
+        });
+      } else if (event.type === 'expense_change') {
+        const modifiedResults = baseResults.map((result) => {
+          if (result.year >= event.year) {
+            return {
+              ...result,
+              total_expenses: result.total_expenses - (event.newFixedExpenses - fixedExpenses) - (event.newNonEssentialExpenses - nonEssentialExpenses),
+            };
+          }
+          return result;
+        });
+        scenarios.push({
+          description: `If the expenses did not change in Year ${event.year}...`,
+          results: modifiedResults,
+        });
+      } else if (event.type === 'house_change') {
+        const modifiedResults = baseResults.map((result) => {
+          if (result.year >= event.year) {
+            return {
+              ...result,
+              house_worth: houseWorth * Math.pow(1 + growthRates.houseWorthGrowthRate, result.year - selectedYear), // Recalculate house worth without the change
+            };
+          }
+          return result;
+        });
+        scenarios.push({
+          description: `If the house price did not change in Year ${event.year}...`,
+          results: modifiedResults,
+        });
+      }
+    });
+
+    setAlternativeScenarios(scenarios);
+  };
+
+// Function to save the simulation results as either a CSV or JSON file
+const saveResultsAsFile = (format) => {
+    if (format === 'csv') {
+      const csvContent = [
+        ['Year', 'Annual Income', 'Total Expenses', 'Disposable Income', 'Stock & Mutual Funds', 'House Worth', 'Total Savings'],
+        ...simulationResults.map((item) => [
+          item.year,
+          item.annual_income.toFixed(2),
+          item.total_expenses.toFixed(2),
+          item.disposable_income.toFixed(2),
+          item.stock_and_mutual_funds_value.toFixed(2),
+          item.house_worth.toFixed(2),
+          item.total_savings.toFixed(2),
+        ]),
+      ]
+        .map((e) => e.join(","))
+        .join("\n");
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      saveAs(blob, 'simulation_results.csv');
+    } else if (format === 'json') {
+      const blob = new Blob([JSON.stringify(simulationResults, null, 2)], {
+        type: 'application/json;charset=utf-8;',
+      });
+      saveAs(blob, 'simulation_results.json');
+    }
+  };
+
+  // Function to save the simulation chart as an image (PNG) or PDF file
+const saveChartAsImage = (format) => {
+    const chartElement = document.querySelector('canvas');
+    if (!chartElement) return;
+
+    html2canvas(chartElement).then((canvas) => {
+      if (format === 'png') {
+        canvas.toBlob((blob) => {
+          saveAs(blob, 'financial_simulation.png');
+        });
+      } else if (format === 'pdf') {
+        const pdf = new jsPDF();
+        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 10, 10, 180, 100);
+        pdf.save('financial_simulation.pdf');
+      }
+    });
+  };
+
+  // Function to add a financial event to the simulation (e.g., income change, expense change, house change)
+const addEvent = () => {
+    const year = parseInt(prompt('Enter the year for the event:'));
+    const type = prompt(
+      'Enter the type of event (income_change, expense_change, house_change):'
+    );
+
+    if (type === 'income_change') {
+      const newIncome = parseFloat(prompt('Enter the new annual income:'));
+      setEvents([...events, { year, type, newIncome }]);
+    } else if (type === 'expense_change') {
+      const newFixedExpenses = parseFloat(
+        prompt('Enter the new annual fixed expenses:')
+      );
+      const newNonEssentialExpenses = parseFloat(
+        prompt('Enter the new annual non-essential expenses:')
+      );
+      setEvents([
+        ...events,
+        { year, type, newFixedExpenses, newNonEssentialExpenses },
+      ]);
+    } else if (type === 'house_change') {
+      const newHouseWorth = parseFloat(prompt('Enter the new house worth:'));
+      const newMonthlyMortgage = parseFloat(
+        prompt('Enter the new monthly mortgage payment:')
+      );
+      setEvents([
+        ...events,
+        { year, type, newHouseWorth, newMonthlyMortgage },
+      ]);
+    }
+  };
+
+  // Chart data to visualize different aspects of the simulation such as income, expenses, savings, etc.
+const chartData = {
     labels: simulationResults.map((item) => item.year),
     datasets: [
       {
@@ -168,49 +291,33 @@ const FinancialSimulator = () => {
         fill: false,
       },
     ],
+};
+
+  // Function to provide insights into the user's financial resilience based on the simulation results
+const financialResilienceInsights = () => {
+    if (simulationResults.length > 0) {
+      const finalYear = simulationResults[simulationResults.length - 1];
+      return (
+        <div>
+          <h3>Financial Resilience Insights</h3>
+          <p>
+            Based on your simulated decisions, by the year {finalYear.year}, you have managed to
+            accumulate total savings of ${finalYear.total_savings.toFixed(2)}, with gains from
+            investments reaching ${finalYear.stock_and_mutual_funds_value.toFixed(2)}.
+          </p>
+          <p>
+            Your disposable income of ${finalYear.disposable_income.toFixed(2)} indicates your
+            ability to maintain a stable financial position despite potential inflation impacts.
+          </p>
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
-
-    
-
     <div>
-     
-     <nav className="navbar">
-          <ul className="navbar-links">
-            <li>
-              <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
-                <i className="fas fa-home"></i> Home
-              </Link>
-            </li>
-            <li>
-              <Link to="/dashboard" className={location.pathname === '/dashboard' ? 'active' : ''}>
-                <i className="fas fa-tachometer-alt"></i> Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link to="/learning-hub" className={location.pathname === '/learning-hub' ? 'active' : ''}>
-                <i className="fas fa-lightbulb"></i> Learning Hub
-              </Link>
-            </li>
-            <li>
-              <Link to="/challenges" className={location.pathname === '/challenges' ? 'active' : ''}>
-                <i className="fas fa-tasks"></i> Challenges
-              </Link>
-            </li>
-            <li>
-              <Link to="/financial-simulator" className={location.pathname === '/financial-simulator' ? 'active' : ''}>
-                <i className="FaCalculator"></i> Financial Simulator
-              </Link>
-            </li>
-            
-          </ul>
-        </nav>
-
-        <h1>Financial Simulator</h1>
-
-        
-
+      <h1>Financial Simulator</h1>
       <div>
         <label>Annual Income: </label>
         <input
@@ -220,7 +327,7 @@ const FinancialSimulator = () => {
         />
       </div>
       <div>
-        <label>Fixed Expenses: </label>
+        <label>Fixed Expenses (Annual): </label>
         <input
           type="number"
           value={fixedExpenses}
@@ -228,7 +335,7 @@ const FinancialSimulator = () => {
         />
       </div>
       <div>
-        <label>Non-Essential Expenses: </label>
+        <label>Non-Essential Expenses (Annual): </label>
         <input
           type="number"
           value={nonEssentialExpenses}
@@ -244,11 +351,19 @@ const FinancialSimulator = () => {
         />
       </div>
       <div>
-        <label>Monthly Investment: </label>
+        <label>Yearly Investment: </label>
         <input
           type="number"
-          value={monthlyInvestment}
-          onChange={(e) => setMonthlyInvestment(parseFloat(e.target.value))}
+          value={yearlyInvestment}
+          onChange={(e) => setYearlyInvestment(parseFloat(e.target.value))}
+        />
+      </div>
+      <div>
+        <label>Reinvest Savings Annually: </label>
+        <input
+          type="checkbox"
+          checked={investAnnually}
+          onChange={(e) => setInvestAnnually(e.target.checked)}
         />
       </div>
       <div>
@@ -283,8 +398,80 @@ const FinancialSimulator = () => {
           onChange={(e) => setMonthlyMortgage(parseFloat(e.target.value))}
         />
       </div>
-      <button onClick={runSimulation}>Run Simulation</button>
-      {simulationResults.length > 0 && <Line data={chartData} />}
+      // Button to start the financial simulation based on user inputs
+<button onClick={runSimulation}>Run Simulation</button>
+      // Button to add a financial event to the simulation
+<button onClick={addEvent}>Add Event</button>
+      <button onClick={() => saveResultsAsFile('csv')}>Download Results as CSV</button>
+      <button onClick={() => saveResultsAsFile('json')}>Download Results as JSON</button>
+      <button onClick={() => saveChartAsImage('png')}>Download Chart as PNG</button>
+      <button onClick={() => saveChartAsImage('pdf')}>Download Chart as PDF</button>
+
+      {simulationResults.length > 0 && (
+        <>
+          <Line data={chartData} />
+          <h2>Yearly Data</h2>
+          <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px' }}>
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Annual Income</th>
+                <th>Total Expenses</th>
+                <th>Disposable Income</th>
+                <th>Stock & Mutual Funds</th>
+                <th>House Worth</th>
+                <th>Total Savings</th>
+              </tr>
+            </thead>
+            <tbody>
+              {simulationResults.map((item) => (
+                <tr key={item.year}>
+                  <td>{item.year}</td>
+                  <td>${item.annual_income.toFixed(2)}</td>
+                  <td>${item.total_expenses.toFixed(2)}</td>
+                  <td>${item.disposable_income.toFixed(2)}</td>
+                  <td>${item.stock_and_mutual_funds_value.toFixed(2)}</td>
+                  <td>${item.house_worth.toFixed(2)}</td>
+                  <td>${item.total_savings.toFixed(2)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {financialResilienceInsights()}
+          <h2>Alternative Scenarios</h2>
+          {alternativeScenarios.map((scenario, index) => (
+            <div key={index}>
+              <h3>{scenario.description}</h3>
+              <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px' }}>
+                <thead>
+                  <tr>
+                    <th>Year</th>
+                    <th>Annual Income</th>
+                    <th>Total Expenses</th>
+                    <th>Disposable Income</th>
+                    <th>Stock & Mutual Funds</th>
+                    <th>House Worth</th>
+                    <th>Total Savings</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {scenario.results.map((item) => (
+                    <tr key={item.year}>
+                      <td>{item.year}</td>
+                      <td>${item.annual_income.toFixed(2)}</td>
+                      <td>${item.total_expenses.toFixed(2)}</td>
+                      <td>${item.disposable_income.toFixed(2)}</td>
+                      <td>${item.stock_and_mutual_funds_value.toFixed(2)}</td>
+                      <td>${item.house_worth.toFixed(2)}</td>
+                      <td>${item.total_savings.toFixed(2)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ))}
+        </>
+      )}
     </div>
   );
 };
