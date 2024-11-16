@@ -12,6 +12,7 @@ import VirtualPetPage from './pages/VirtualPetPage';
 import DictionaryPage from './pages/DictionaryPage';
 import LearningHubPage from './pages/LearningHubPage';
 import UserInfo from './pages/UserInfo';
+import Quiz from './components/educational-modules/Quiz';
 import './App.css';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/virtual-pet" element={<VirtualPetPage />} />
           <Route path="/dictionary" element={<DictionaryPage />} />
           <Route path="/learning-hub" element={<LearningHubPage />} />
+          <Route path="/quiz" element={<Quiz />} />
         </Routes>
       </div>
     </Router>

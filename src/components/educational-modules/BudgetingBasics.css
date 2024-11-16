@@ -1,179 +1,176 @@
 /* BudgetingBasics.css */
 
-body {
-    background: linear-gradient(135deg, #e3f0ff, #ffe3e9);
-    font-family: 'Comic Sans MS', sans-serif;
-    color: #333;
-    margin: 0;
-    padding: 0;
-    background-attachment: fixed;
-  }
-  
-  .budgeting-basics-container {
-    max-width: 800px;
-    margin: 20px auto;
+.budgeting-basics {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 60px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: 'Comic Sans MS', sans-serif;
+  color: #333;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border: 5px solid #1E90FF;
+}
+
+.budgeting-basics h1 {
+  font-size: 3em;
+  color: #1E90FF;
+  margin-bottom: 20px;
+  animation: bounceIn 1.5s ease;
+}
+
+.budgeting-basics h2 {
+  font-size: 1.8em;
+  color: #1E90FF;
+  margin-bottom: 20px;
+  animation: fadeInUp 1.5s ease;
+}
+
+.navbar {
+  width: 100%;
+  background-color: #1E90FF;
+  padding: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-links {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.navbar-links li {
+  margin: 0 15px;
+}
+
+.navbar-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.2em;
+  transition: color 0.3s ease;
+}
+
+.navbar-links a:hover {
+  color: #FFD700;
+}
+
+.navbar-links i {
+  margin-right: 8px;
+  font-size: 1.2em;
+}
+
+.instructional-video {
+  background-color: #f0f8ff;
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  width: 90%;
+  max-width: 800px;
+  animation: slideIn 1.5s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.instructional-video .video-wrapper {
+  width: 100%;
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.instructional-video video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.submit-button {
+  margin-top: 20px;
+  background-color: #1E90FF;
+  color: #ffffff;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+  animation: bounce 1s ease infinite alternate;
+}
+
+.submit-button:hover {
+  background-color: #1C86EE;
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }  
+  100% { opacity: 1; }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.9); opacity: 0; }
+  60% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideIn {
+  0% { transform: translateX(-100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+@media (max-width: 600px) {
+  .budgeting-basics {
     padding: 20px;
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
   }
-  
-  .budgeting-basics-container:hover {
-    transform: scale(1.02);
-  }
-  
-  .header {
-    text-align: center;
-    color: #6446ea;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px #f0e6ff;
-  }
-  
-  .header h1 {
-    font-size: 2.4em;
-    margin: 0;
-    color: #6446ea;
-  }
-  
-  .header h2 {
-    font-size: 1.1em;
-    color: #999;
-    margin: 8px 0;
-  }
-  
+
   .navbar {
-    background-color: #6446ea;
     padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 20px;
   }
-  
-  .navbar-links {
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-    padding: 0;
-    margin: 0;
-  }
-  
+
   .navbar-links li {
     margin: 0 10px;
   }
-  
+
   .navbar-links a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
+    font-size: 1em;
   }
-  
-  .navbar-links a:hover {
-    color: #ffefc6;
+
+  .instructional-video {
+    padding: 20px;
   }
-  
-  .main-content {
-    padding: 10px;
+
+  .instructional-video video {
+    height: 300px;
   }
-  
-  .education-section {
-    background-color: #ffefc6;
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  }
-  
-  .education-section h3 {
-    font-size: 1.6em;
-    color: #ff6347;
-    margin-bottom: 10px;
-    text-align: center;
-    text-shadow: 1px 1px #ffe1e1;
-  }
-  
-  .education-section ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 10px;
-  }
-  
-  .education-section ul li {
-    background-color: #ffe8d1;
-    padding: 10px;
-    margin: 6px 0;
-    border-radius: 10px;
-    text-align: center;
-    transition: background-color 0.3s ease;
-  }
-  
-  .education-section ul li:hover {
-    background-color: #ffd8b8;
-  }
-  
-  .quiz-section {
-    background-color: #e0f4ff;
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-    text-align: center;
-  }
-  
-  .quiz-question h4 {
-    font-size: 1.4em;
-    color: #5a73de;
-    margin-bottom: 10px;
-  }
-  
-  .quiz-question p {
-    font-size: 1.2em;
-    color: #333;
-    margin-bottom: 15px;
-  }
-  
-  .quiz-option {
-    background-color: #ffd580;
-    border: none;
+
+  .submit-button {
     padding: 10px 20px;
     font-size: 1em;
-    border-radius: 8px;
-    margin: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s;
   }
-  
-  .quiz-option:hover {
-    background-color: #ffad60;
-    transform: scale(1.05);
-  }
-  
-  .quiz-results {
-    background-color: #e0ffe0;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-    text-align: center;
-  }
-  
-  .quiz-results h4 {
-    font-size: 1.6em;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .quiz-results p {
-    font-size: 1.2em;
-    color: #444;
-  }
-  
-  .footer {
-    text-align: center;
-    font-size: 1em;
-    color: #666;
-    padding: 10px;
-    border-top: 1px solid #ddd;
-    margin-top: 20px;
-  }
-  
+}
