@@ -37,12 +37,13 @@ body {
   margin: 10px 0;
 }
 
+/* Updated Dashboard CSS */
 .navbar {
-  background-color: #1E90FF;
-  padding: 10px;
-  border-radius: 10px;
-  text-align: center;
+  background: linear-gradient(90deg, #1E90FF, #6A5ACD);
+  padding: 15px;
+  border-radius: 15px;
   margin-bottom: 20px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .navbar-links {
@@ -51,23 +52,44 @@ body {
   margin: 0;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   flex-wrap: wrap;
 }
 
 .navbar-links li {
-  margin: 0 15px;
+  margin: 10px;
 }
 
 .navbar-links a {
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: 25px;
   font-size: 1.1em;
-  transition: color 0.3s ease;
+  font-weight: bold;
+  text-decoration: none;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .navbar-links a:hover {
-  color: #FFD700;
+  background: #00ffff;
+  color: #333;
+  transform: scale(1.1);
+  box-shadow: 0px 6px 20px rgba(255, 223, 0, 0.6);
+}
+
+.navbar-links a i {
+  font-size: 1.3em;
+  transition: transform 0.3s ease;
+}
+
+.navbar-links a:hover i {
+  transform: rotate(20deg);
 }
 
 .main-content {
@@ -120,7 +142,7 @@ body {
 
 .add-expense-button {
   grid-column: span 2;
-  background-color: #FFD700;
+  background-color: #00ffff;
   color: #333;
   border: none;
   padding: 15px 30px;
@@ -190,3 +212,4 @@ body {
   border-top: 1px solid #ddd;
   margin-top: 20px;
 }
+
