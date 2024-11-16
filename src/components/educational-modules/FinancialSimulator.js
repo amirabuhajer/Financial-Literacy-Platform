@@ -1,7 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
+import React, { useState } from 'react';
 import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 
 ChartJS.register(
   CategoryScale,
@@ -10,49 +18,122 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend,
-  Filler
+  Legend
 );
 
 const FinancialSimulator = () => {
-  const [selectedYear, setSelectedYear] = useState(2011);
+  const [selectedYear, setSelectedYear] = useState(2021);
+  const [endYear, setEndYear] = useState(2031);
+  const [annualIncome, setAnnualIncome] = useState(0);
+  const [monthlyInvestment, setMonthlyInvestment] = useState(0);
+  const [reduceExpenses, setReduceExpenses] = useState(0);
+  const [switchToRenting, setSwitchToRenting] = useState(false);
+  const [savingsAmount, setSavingsAmount] = useState(0);
+  const [monthlyMortgage, setMonthlyMortgage] = useState(0);
+  const [fixedExpenses, setFixedExpenses] = useState(0);
+  const [nonEssentialExpenses, setNonEssentialExpenses] = useState(0);
+  const [houseWorth, setHouseWorth] = useState(0);
   const [simulationResults, setSimulationResults] = useState([]);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [events, setEvents] = useState([]);
 
-  const runSimulation = async () => {
-    try {
-      console.log('Running simulation for year:', selectedYear);
-      setLoading(true);
-
-      // Make a POST request to the backend API
-      const response = await axios.post('http://localhost:5000/run_simulation', {
-        start_year: selectedYear,
-      });
-
-      // Log response data to check if data is returned as expected
-      console.log('Response data:', response.data);
-
-      if (response.status === 200 && response.data.length > 0) {
-        // Set the response data to state
-        setSimulationResults(response.data);
-        setErrorMessage(''); // Clear any previous errors
-      } else {
-        setErrorMessage('No data returned from the server.');
-        console.warn('No data returned from the server.');
-      }
-    } catch (error) {
-      console.error('Error running simulation:', error);
-      setErrorMessage('There was an issue running the simulation. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+  // Growth factors
+  const growthRates = {
+    annualIncomeGrowth: 3.153304 / 100, // Annual income growth
+    fixedExpensesGrowth: 3.97 / 100, // Fixed yearly expenses growth
+    nonEssentialExpensesGrowth: 3.37 / 100, // Non-essential monthly expenses growth
+    savingsInterestRate: 0.94 / 100, // Savings interest rate
+    stockAndMutualFundRate: 25 / 100, // Annual stock and mutual funds growth
+    houseWorthGrowthRate: 6.42 / 100, // Annual house worth growth
   };
 
-  // Chart data configuration
+  const runSimulation = () => {
+    const results = [];
+    let currentAnnualIncome = annualIncome;
+    let currentFixedExpenses = fixedExpenses; // Fixed expenses are already annualized
+    let currentNonEssentialExpenses = nonEssentialExpenses * 12; // Convert monthly to annual
+    let currentHouseWorth = houseWorth;
+    let rentExpenses = 0;
+    let totalSavings = savingsAmount;
+    let totalStockInvestment = monthlyInvestment * 12; // Total annual investment in stocks
+  
+    for (let year = selectedYear; year <= endYear; year++) {
+      const currentYearEvents = events.filter((event) => event.year === year);
+      currentYearEvents.forEach((event) => {
+        switch (event.type) {
+          case 'payraise':
+            currentAnnualIncome *= 1 + event.percentage / 100;
+            break;
+          case 'new_job':
+            currentAnnualIncome = event.newIncome;
+            break;
+          case 'job_loss':
+            currentAnnualIncome *= 1 - event.percentage / 100;
+            break;
+          case 'better_job':
+            currentAnnualIncome *= 1 + event.percentage / 100;
+            break;
+          default:
+            break;
+        }
+      });
+  
+      // Apply annual growth rates
+      currentAnnualIncome *= 1 + growthRates.annualIncomeGrowth;
+      currentFixedExpenses *= 1 + growthRates.fixedExpensesGrowth;
+      currentNonEssentialExpenses *= 1 + growthRates.nonEssentialExpensesGrowth;
+      rentExpenses *= 1 + growthRates.fixedExpensesGrowth; // Assume rent grows similarly to fixed expenses
+      currentHouseWorth *= 1 + growthRates.houseWorthGrowthRate;
+  
+      // Add user-specified savings amount every year
+      totalSavings += savingsAmount;
+      totalSavings *= 1 + growthRates.savingsInterestRate;
+  
+      // Stock and mutual fund investment increases by 25% annually
+      totalStockInvestment *= 1 + growthRates.stockAndMutualFundRate;
+  
+      // Calculate adjusted non-essential expenses based on user input
+      const adjustedNonEssentialExpenses =
+        currentNonEssentialExpenses * (1 - reduceExpenses / 100);
+  
+      // Adjust for renting
+      const adjustedRentExpenses = switchToRenting
+        ? rentExpenses * 0.9 // Reduced rent for renting scenario
+        : rentExpenses;
+  
+      // Total annual expenses calculation
+      const totalExpenses =
+        currentFixedExpenses +
+        adjustedNonEssentialExpenses +
+        adjustedRentExpenses +
+        monthlyMortgage * 12; // Convert monthly mortgage to annual
+  
+      const disposableIncome = currentAnnualIncome - totalExpenses;
+  
+      results.push({
+        year,
+        annual_income: currentAnnualIncome,
+        total_expenses: totalExpenses,
+        disposable_income: disposableIncome,
+        stock_and_mutual_funds_value: totalStockInvestment,
+        house_worth: currentHouseWorth,
+        monthly_mortgage: monthlyMortgage,
+        total_savings: totalSavings,
+      });
+    }
+  
+    setSimulationResults(results);
+  };
+  
+
   const chartData = {
     labels: simulationResults.map((item) => item.year),
     datasets: [
+      {
+        label: 'Stock and Mutual Funds Value Over Time',
+        data: simulationResults.map((item) => item.stock_and_mutual_funds_value),
+        borderColor: 'rgba(153, 102, 255, 1)',
+        fill: false,
+      },
       {
         label: 'Disposable Income Over Time',
         data: simulationResults.map((item) => item.disposable_income),
@@ -65,62 +146,104 @@ const FinancialSimulator = () => {
         borderColor: 'rgba(255,99,132,1)',
         fill: false,
       },
+      {
+        label: 'House Worth Over Time',
+        data: simulationResults.map((item) => item.house_worth),
+        borderColor: 'rgba(54,162,235,1)',
+        fill: false,
+      },
+      {
+        label: 'Total Savings Over Time',
+        data: simulationResults.map((item) => item.total_savings),
+        borderColor: 'rgba(34,139,34,1)',
+        fill: false,
+      },
+      {
+        label: 'Annual Income Over Time',
+        data: simulationResults.map((item) => item.annual_income),
+        borderColor: 'rgba(255,165,0,1)',
+        fill: false,
+      },
     ],
-  };
-
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: {
-        type: 'category',
-      },
-      y: {
-        beginAtZero: true,
-      },
-    },
   };
 
   return (
     <div>
       <h1>Financial Simulator</h1>
       <div>
-        <label>Select Start Year: </label>
-        <select value={selectedYear} onChange={(e) => setSelectedYear(parseInt(e.target.value))}>
-          {[...Array(2022 - 2011).keys()].map((i) => {
-            const year = 2011 + i;
-            return <option key={year} value={year}>{year}</option>;
-          })}
-        </select>
-        <button onClick={runSimulation} disabled={loading}>
-          {loading ? 'Running...' : 'Run Simulation'}
-        </button>
+        <label>Annual Income: </label>
+        <input
+          type="number"
+          value={annualIncome}
+          onChange={(e) => setAnnualIncome(parseFloat(e.target.value))}
+        />
       </div>
-      
-      {errorMessage && (
-        <div style={{ color: 'red', marginTop: '10px' }}>
-          <strong>{errorMessage}</strong>
-        </div>
-      )}
-
-      {simulationResults.length > 0 && (
-        <div>
-          <h2>Simulation Results</h2>
-          <div style={{ height: '400px' }}>
-            <Line data={chartData} options={chartOptions} />
-          </div>
-          <div>
-            {simulationResults.map((result) => (
-              <div key={result.year}>
-                <h3>Year: {result.year}</h3>
-                <p>Annual Income: {result.annual_income !== null && result.annual_income !== undefined ? result.annual_income.toFixed(2) : 'N/A'}</p>
-                <p>Total Expenses: {result.total_expenses !== null && result.total_expenses !== undefined ? result.total_expenses.toFixed(2) : 'N/A'}</p>
-                <p>Disposable Income: {result.disposable_income !== null && result.disposable_income !== undefined ? result.disposable_income.toFixed(2) : 'N/A'}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      <div>
+        <label>Fixed Expenses: </label>
+        <input
+          type="number"
+          value={fixedExpenses}
+          onChange={(e) => setFixedExpenses(parseFloat(e.target.value))}
+        />
+      </div>
+      <div>
+        <label>Non-Essential Expenses: </label>
+        <input
+          type="number"
+          value={nonEssentialExpenses}
+          onChange={(e) => setNonEssentialExpenses(parseFloat(e.target.value))}
+        />
+      </div>
+      <div>
+        <label>House Worth: </label>
+        <input
+          type="number"
+          value={houseWorth}
+          onChange={(e) => setHouseWorth(parseFloat(e.target.value))}
+        />
+      </div>
+      <div>
+        <label>Monthly Investment: </label>
+        <input
+          type="number"
+          value={monthlyInvestment}
+          onChange={(e) => setMonthlyInvestment(parseFloat(e.target.value))}
+        />
+      </div>
+      <div>
+        <label>Savings Amount (Added Annually): </label>
+        <input
+          type="number"
+          value={savingsAmount}
+          onChange={(e) => setSavingsAmount(parseFloat(e.target.value))}
+        />
+      </div>
+      <div>
+        <label>Reduce Non-Essential Expenses (%): </label>
+        <input
+          type="number"
+          value={reduceExpenses}
+          onChange={(e) => setReduceExpenses(parseFloat(e.target.value))}
+        />
+      </div>
+      <div>
+        <label>Switch to Renting: </label>
+        <input
+          type="checkbox"
+          checked={switchToRenting}
+          onChange={(e) => setSwitchToRenting(e.target.checked)}
+        />
+      </div>
+      <div>
+        <label>Monthly Mortgage Payment: </label>
+        <input
+          type="number"
+          value={monthlyMortgage}
+          onChange={(e) => setMonthlyMortgage(parseFloat(e.target.value))}
+        />
+      </div>
+      <button onClick={runSimulation}>Run Simulation</button>
+      {simulationResults.length > 0 && <Line data={chartData} />}
     </div>
   );
 };
