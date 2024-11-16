@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './LearningHubPage.css';  // Import the CSS file for styling
+import './LearningHubPage.css';
 import { FaQuestionCircle, FaPlayCircle, FaTasks } from 'react-icons/fa';
 
 function LearningHubPage() {
@@ -126,12 +126,32 @@ function LearningHubPage() {
       <header className="header">
       <nav className="navbar">
           <ul className="navbar-links">
-            <li><Link to="/"><i className="fas fa-home"></i> Home</Link></li>
-            <li><Link to="/dashboard"><i className="fas fa-tachometer-alt"></i> Dashboard</Link></li>
-            <li><Link to="/learning-hub"><i className="fas fa-lightbulb"></i> Learning Hub</Link></li>
-            <li><Link to="/challenges"><i className="fas fa-tasks"></i> Challenges</Link></li>
-            <li><Link to="/rewards-shop"><i className="fas fa-store"></i> Rewards Shop</Link></li>
-            </ul>
+            <li>
+              <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
+                <i className="fas fa-home"></i> Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/dashboard" className={location.pathname === '/dashboard' ? 'active' : ''}>
+                <i className="fas fa-tachometer-alt"></i> Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link to="/learning-hub" className={location.pathname === '/learning-hub' ? 'active' : ''}>
+                <i className="fas fa-lightbulb"></i> Learning Hub
+              </Link>
+            </li>
+            <li>
+              <Link to="/challenges" className={location.pathname === '/challenges' ? 'active' : ''}>
+                <i className="fas fa-tasks"></i> Challenges
+              </Link>
+            </li>
+            <li>
+              <Link to="/rewards-shop" className={location.pathname === '/rewards-shop' ? 'active' : ''}>
+                <i className="fas fa-store"></i> Rewards Shop
+              </Link>
+            </li>
+          </ul>
         </nav>
         <h1>Learning Hub</h1>
         <h2>Explore and Learn: Build Your Financial Literacy</h2>

@@ -25,6 +25,42 @@ function RewardsShopPage() {
   return (
     <div className="rewards-shop-container">
       <header className="header">
+
+      <nav className="navbar">
+          <ul className="navbar-links">
+            <li>
+              <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
+                <i className="fas fa-home"></i> Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/budgeting-basics" className={location.pathname === '/budgeting-basics' ? 'active' : ''}>
+                <i className="fa fa-wallet"></i> Budgeting Basics
+              </Link>
+            </li>
+            <li>
+              <Link to="/avings-and-investments" className={location.pathname === '/savings-and-investments' ? 'active' : ''}>
+                <i className="fa fa-chart-line"></i> Savings and Investments
+              </Link>
+            </li>
+            <li>
+              <Link to="/debt-management" className={location.pathname === '/debt-management' ? 'active' : ''}>
+                <i className="fa fa-hand-holding-usd"></i> Debt Management
+              </Link>
+            </li>
+            <li>
+              <Link to="/rewards-shop" className={location.pathname === '/rewards-shop' ? 'active' : ''}>
+                <i className="fas fa-store"></i> Rewards Shop
+              </Link>
+            </li>
+            <li>
+              <Link to="/challenges" className={location.pathname === '/challenges' ? 'active' : ''}>
+                <i className="fas fa-tasks"></i> Challenges
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
         <h1>Rewards Shop</h1>
         <h2>Redeem Your Points for Exciting Rewards</h2>
       </header>

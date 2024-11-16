@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './HomePage.css';
 import { FaPiggyBank, FaChartLine, FaBook } from 'react-icons/fa';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
@@ -27,6 +27,7 @@ function HomePage() {
   const [isSignUpVisible, setIsSignUpVisible] = useState(false);
   const [isLoginVisible, setIsLoginVisible] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation(); // Get current route information
 
   const handleSignUp = async () => {
     try {
@@ -55,14 +56,34 @@ function HomePage() {
   return (
     <div className="homepage-container">
       <header className="header">
-        <nav className="navbar">
+       <nav className="navbar">
           <ul className="navbar-links">
-            <li><Link to="/"><i className="fas fa-home"></i> Home</Link></li>
-            <li><Link to="/dashboard"><i className="fas fa-tachometer-alt"></i> Dashboard</Link></li>
-            <li><Link to="/learning-hub"><i className="fas fa-lightbulb"></i> Learning Hub</Link></li>
-            <li><Link to="/challenges"><i className="fas fa-tasks"></i> Challenges</Link></li>
-            <li><Link to="/rewards-shop"><i className="fas fa-store"></i> Rewards Shop</Link></li>
-            </ul>
+            <li>
+              <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
+                <i className="fas fa-home"></i> Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/dashboard" className={location.pathname === '/dashboard' ? 'active' : ''}>
+                <i className="fas fa-tachometer-alt"></i> Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link to="/learning-hub" className={location.pathname === '/learning-hub' ? 'active' : ''}>
+                <i className="fas fa-lightbulb"></i> Learning Hub
+              </Link>
+            </li>
+            <li>
+              <Link to="/challenges" className={location.pathname === '/challenges' ? 'active' : ''}>
+                <i className="fas fa-tasks"></i> Challenges
+              </Link>
+            </li>
+            <li>
+              <Link to="/rewards-shop" className={location.pathname === '/rewards-shop' ? 'active' : ''}>
+                <i className="fas fa-store"></i> Rewards Shop
+              </Link>
+            </li>
+          </ul>
         </nav>
         <h1>My Financial Pathways</h1>
         <h2>Take the First Step Toward Financial Confidence Today</h2>
