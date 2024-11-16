@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 5px solid #6446ea;
+  
 }
 
 .header h1 {
@@ -179,4 +179,15 @@
     padding: 10px 20px;
     font-size: 1.2em;
   }
+}
+
+/* Active link styles */
+.navbar-links a.active {
+  background-color: #FFD700; /* Gold background */
+  color: #1E90FF; /* Highlighted text color */
+  font-weight: bold;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  transform: scale(1.1); /* Slight enlargement */
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
