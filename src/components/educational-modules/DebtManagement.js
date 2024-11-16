@@ -1,85 +1,92 @@
 // DebtManagement.js
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './DebtManagement.css';
+import { motion } from 'framer-motion';
 
 function DebtManagement() {
-  const [debtAmount, setDebtAmount] = useState(0);
-  const [monthlyPayment, setMonthlyPayment] = useState(0);
-  const [interestRate, setInterestRate] = useState(0);
-  const [monthsToPayOff, setMonthsToPayOff] = useState(null);
+  const lessons = [
+    {
+      title: 'Introduction to Debt Management',
+      url: 'https://www.youtube.com/embed/xRYq6H_T9bE',
+      description: 'Learn the basics of managing debt and effective strategies for reducing it.'
+    },
+    {
+      title: 'Understanding Interest Rates',
+      url: 'https://www.youtube.com/embed/akKk8o8ssn8',
+      description: 'Understand how interest rates impact your debt and how to minimize interest costs.'
+    },
+    {
+      title: 'Debt Consolidation Explained',
+      url: 'https://www.youtube.com/embed/5cpIzBJIyVg',
+      description: 'Learn about debt consolidation and how it can help simplify and reduce your debt.'
+    },
+    {
+      title: 'Creating a Debt Repayment Plan',
+      url: 'https://www.youtube.com/embed/eKLDez1wGds',
+      description: 'Learn how to create an effective debt repayment plan that works for you.'
+    },
+    {
+      title: 'Staying Out of Debt',
+      url: 'https://www.youtube.com/embed/O91DT1pR1ew',
+      description: 'Tips on staying out of debt and maintaining financial freedom.'
+    }
+  ];
 
-  const calculateDebtPayoff = () => {
-    const rate = parseFloat(interestRate) / 100 / 12;
-    const payment = parseFloat(monthlyPayment);
-    const debt = parseFloat(debtAmount);
+  const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
+  const navigate = useNavigate();
 
-    if (rate === 0) {
-      setMonthsToPayOff(debt / payment);
+  const handleNext = () => {
+    if (currentLessonIndex < lessons.length - 1) {
+      setCurrentLessonIndex(currentLessonIndex + 1);
     } else {
-      const months = Math.log(payment / (payment - rate * debt)) / Math.log(1 + rate);
-      setMonthsToPayOff(Math.ceil(months));
+      navigate('/quiz-debt');
     }
   };
 
   return (
     <div className="debt-management-container">
       <header className="header">
-        <h1>Debt Management</h1>
+        <nav className="navbar">
+          <ul className="navbar-links">
+            <li><Link to="/"><i className="fa fa-home"></i> Home</Link></li>
+            <li><Link to="/budgeting-basics"><i className="fa fa-wallet"></i> Budgeting Basics</Link></li>
+            <li><Link to="/savings-and-investments"><i className="fa fa-chart-line"></i> Savings & Investments</Link></li>
+            <li><Link to="/debt-management"><i className="fa fa-hand-holding-usd"></i> Debt Management</Link></li>
+            <li><Link to="/challenges"><i className="fa fa-tasks"></i> Challenges</Link></li>
+            <li><Link to="/rewards-shop"><i className="fa fa-star"></i> Rewards Shop</Link></li>
+            <li><Link to="/virtual-pet"><i className="fa fa-paw"></i> Virtual Pet</Link></li>
+            <li><Link to="/dictionary"><i className="fa fa-book"></i> Financial Dictionary</Link></li>
+          </ul>
+        </nav>
+        <h1>{lessons[currentLessonIndex].title}</h1>
         <h2>Learn How to Manage and Reduce Your Debt Effectively</h2>
       </header>
 
       <main className="main-content">
-        <section className="introduction-section">
-          <h3>Introduction to Debt Management</h3>
-          <p>Managing debt can feel overwhelming, but with the right plan, you can reduce your debt effectively. This tool will help you estimate the time needed to pay off your debt, considering your interest rate and monthly payment.</p>
-        </section>
-
-        <section className="debt-calculator-section">
-          <h4>Debt Payoff Calculator</h4>
-          <form className="debt-form" onSubmit={(e) => e.preventDefault()}>
-            <label htmlFor="debt-amount">Total Debt Amount ($):</label>
-            <input
-              type="number"
-              id="debt-amount"
-              value={debtAmount}
-              onChange={(e) => setDebtAmount(e.target.value)}
-            />
-
-            <label htmlFor="monthly-payment">Monthly Payment ($):</label>
-            <input
-              type="number"
-              id="monthly-payment"
-              value={monthlyPayment}
-              onChange={(e) => setMonthlyPayment(e.target.value)}
-            />
-
-            <label htmlFor="interest-rate">Interest Rate (%):</label>
-            <input
-              type="number"
-              id="interest-rate"
-              value={interestRate}
-              onChange={(e) => setInterestRate(e.target.value)}
-            />
-
-            <button type="button" onClick={calculateDebtPayoff} className="calculate-debt-button">
-              Calculate Payoff Time
-            </button>
-          </form>
-
-          {monthsToPayOff !== null && (
-            <p className="payoff-result">
-              Based on your inputs, it will take approximately {monthsToPayOff} months to pay off your debt.
-            </p>
-          )}
-        </section>
-
-        <section className="tips-section">
-          <h4>Tips to Manage Your Debt</h4>
-          <ul>
-            <li>Focus on paying off high-interest debt first to save money on interest payments.</li>
-            <li>Consider debt consolidation if you have multiple debts with high interest rates.</li>
-            <li>Maintain a budget to keep track of your expenses and ensure you make timely debt payments.</li>
-          </ul>
+        <section className="instructional-video">
+          <div className="video-content">
+            <h3>{lessons[currentLessonIndex].title}</h3>
+            <div className="video-wrapper">
+              <iframe
+                src={lessons[currentLessonIndex].url}
+                title={lessons[currentLessonIndex].title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="video-player"
+              ></iframe>
+            </div>
+            <p>{lessons[currentLessonIndex].description}</p>
+          </div>
+          <motion.button
+            className="next-button"
+            onClick={handleNext}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {currentLessonIndex === lessons.length - 1 ? 'Take the Quiz' : 'Next Lesson'}
+          </motion.button>
         </section>
       </main>
 

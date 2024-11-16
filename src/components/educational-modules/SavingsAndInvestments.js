@@ -1,39 +1,52 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './SavingsAndInvestments.css';
+import { motion } from 'framer-motion';
 
 function SavingsAndInvestments() {
-  const [points, setPoints] = useState(100);
-  const [stocks, setStocks] = useState({});
-  const [investment, setInvestment] = useState('');
-  const [investmentAmount, setInvestmentAmount] = useState(0);
-  const [portfolio, setPortfolio] = useState([]);
-  const [monthlySavings, setMonthlySavings] = useState(0);
-  const [interestRate, setInterestRate] = useState(0);
-  const [years, setYears] = useState(0);
-  const [futureValue, setFutureValue] = useState(0);
-
-  const handleBuyStock = () => {
-    if (investment && investmentAmount > 0 && investmentAmount <= points) {
-      const newPortfolio = [...portfolio, { name: investment, amount: investmentAmount }];
-      setPortfolio(newPortfolio);
-      setPoints(points - investmentAmount);
-      setInvestment('');
-      setInvestmentAmount(0);
+  const lessons = [
+    {
+      title: 'Introduction to Savings',
+      url: 'https://www.youtube.com/embed/p7HKvqRI_Bo',
+      description: 'Learn the importance of saving and how it can secure your financial future.'
+    },
+    {
+      title: 'Investment Basics',
+      url: 'https://www.youtube.com/embed/IIKr2915l2g',
+      description: 'Understand the basics of investing and different investment options.'
+    },
+    {
+      title: 'Compound Interest Explained',
+      url: 'https://www.youtube.com/embed/AeR9tTXflfk',
+      description: "Learn how compound interest works and why it's important for long-term savings."
+    },
+    {
+      title: 'Diversifying Your Portfolio',
+      url: 'https://www.youtube.com/embed/3B7xqYp7q2w',
+      description: 'Understand the importance of diversification in reducing investment risk.'
+    },
+    {
+      title: 'Setting Long-Term Financial Goals',
+      url: 'https://www.youtube.com/embed/7R92sOFpFhE',
+      description: 'Learn how to set achievable long-term financial goals for a secure future.'
     }
-  };
+  ];
 
-  const calculateFutureValue = () => {
-    const rate = interestRate / 100;
-    const n = years;
-    const futureValue = monthlySavings * (((1 + rate) ** n - 1) / rate);
-    setFutureValue(futureValue.toFixed(2));
+  const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
+  const navigate = useNavigate();
+
+  const handleNext = () => {
+    if (currentLessonIndex < lessons.length - 1) {
+      setCurrentLessonIndex(currentLessonIndex + 1);
+    } else {
+      navigate('/quiz-investment');
+    }
   };
 
   return (
     <div className="savings-investments-container">
       <header className="header">
-      <nav className="navbar">
+        <nav className="navbar">
           <ul className="navbar-links">
             <li><Link to="/"><i className="fa fa-home"></i> Home</Link></li>
             <li><Link to="/budgeting-basics"><i className="fa fa-wallet"></i> Budgeting Basics</Link></li>
@@ -45,81 +58,34 @@ function SavingsAndInvestments() {
             <li><Link to="/dictionary"><i className="fa fa-book"></i> Financial Dictionary</Link></li>
           </ul>
         </nav>
-        <h1>Savings & Investments</h1>
+        <h1>{lessons[currentLessonIndex].title}</h1>
         <h2>Learn How to Grow Your Wealth</h2>
       </header>
 
       <main className="main-content">
-        {/* Educational Videos Section */}
-        <section className="education-section">
-          <h3>Educational Videos</h3>
-          <div className="videos">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/p7HKvqRI_Bo?si=drU4t8uydwWWiIe1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>        
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/IIKr2915l2g?si=Au-itKkdtK8VCmct" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </div>
-        </section>
-
-        {/* Savings and Investment Tips Section */}
-        <section className="tips-section">
-          <h3>Savings & Investment Tips</h3>
-          <ul>
-            <li>Start saving early to take advantage of compound interest.</li>
-            <li>Diversify your investments to reduce risk.</li>
-            <li>Set specific financial goals and make a plan to achieve them.</li>
-            <li>Automate your savings to ensure consistency.</li>
-            <li>Invest in low-cost index funds for long-term growth.</li>
-          </ul>
-        </section>
-
-        {/* Savings & Investment Calculator Section */}
-        <section className="calculator-section">
-          <h3>Savings & Investment Calculator</h3>
-          <form className="calculator-form" onSubmit={(e) => e.preventDefault()}>
-            <label htmlFor="monthly-savings">Monthly Savings Amount ($):</label>
-            <input type="number" id="monthly-savings" value={monthlySavings} onChange={(e) => setMonthlySavings(parseFloat(e.target.value) || 0)} placeholder="Enter monthly savings amount" />
-
-            <label htmlFor="interest-rate">Annual Interest Rate (%):</label>
-            <input type="number" id="interest-rate" value={interestRate} onChange={(e) => setInterestRate(parseFloat(e.target.value) || 0)} placeholder="Enter interest rate" />
-
-            <label htmlFor="years">Number of Years:</label>
-            <input type="number" id="years" value={years} onChange={(e) => setYears(parseFloat(e.target.value) || 0)} placeholder="Enter number of years" />
-
-            <button type="button" onClick={calculateFutureValue} className="calculate-button">Calculate Future Value</button>
-          </form>
-
-          {futureValue > 0 && (
-            <div className="future-value-result">
-              <p>The future value of your savings is: <strong>${futureValue}</strong></p>
+        <section className="instructional-video">
+          <div className="video-content">
+            <h3>{lessons[currentLessonIndex].title}</h3>
+            <div className="video-wrapper">
+              <iframe
+                src={lessons[currentLessonIndex].url}
+                title={lessons[currentLessonIndex].title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="video-player"
+              ></iframe>
             </div>
-          )}
-        </section>
-
-        {/* Stock Simulation Section */}
-        <section className="stock-simulation-section">
-          <h3>Stock Investment Simulation</h3>
-          <p>You have <strong>{points}</strong> reward points available to invest.</p>
-          <form className="investment-form" onSubmit={(e) => e.preventDefault()}>
-            <label htmlFor="investment">Choose a Stock:</label>
-            <input type="text" id="investment" value={investment} onChange={(e) => setInvestment(e.target.value)} placeholder="e.g., TechCorp" />
-
-            <label htmlFor="investment-amount">Investment Amount (Points):</label>
-            <input type="number" id="investment-amount" value={investmentAmount} onChange={(e) => setInvestmentAmount(parseFloat(e.target.value) || 0)} placeholder="Enter amount" />
-
-            <button type="button" onClick={handleBuyStock} className="buy-stock-button">Buy Stock</button>
-          </form>
-
-          <div className="portfolio">
-            <h4>Your Portfolio</h4>
-            {portfolio.length > 0 ? (
-              <ul>
-                {portfolio.map((stock, index) => (
-                  <li key={index}>{stock.name} - {stock.amount} points</li>
-                ))}
-              </ul>
-            ) : (
-              <p>No investments yet. Start investing to grow your points!</p>
-            )}
+            <p>{lessons[currentLessonIndex].description}</p>
           </div>
+          <motion.button
+            className="next-button"
+            onClick={handleNext}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {currentLessonIndex === lessons.length - 1 ? 'Take the Quiz' : 'Next Lesson'}
+          </motion.button>
         </section>
       </main>
 
