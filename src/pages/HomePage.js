@@ -62,9 +62,7 @@ function HomePage() {
             <li><Link to="/learning-hub"><i className="fas fa-lightbulb"></i> Learning Hub</Link></li>
             <li><Link to="/challenges"><i className="fas fa-tasks"></i> Challenges</Link></li>
             <li><Link to="/rewards-shop"><i className="fas fa-store"></i> Rewards Shop</Link></li>
-            <li><Link to="/virtual-pet"><i className="fas fa-paw"></i> Virtual Pet</Link></li>
-            <li><Link to="/dictionary"><i className="fas fa-book"></i> Financial Dictionary</Link></li>
-          </ul>
+            </ul>
         </nav>
         <h1>My Financial Pathways</h1>
         <h2>Take the First Step Toward Financial Confidence Today</h2>

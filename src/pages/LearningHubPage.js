@@ -124,16 +124,14 @@ function LearningHubPage() {
   return (
     <div className="learning-hub-container">
       <header className="header">
-        <nav className="navbar">
+      <nav className="navbar">
           <ul className="navbar-links">
-            <li><Link to="/home">Home</Link></li>
-            <li><Link to="/dashboard">Dashboard</Link></li>
-            <li><Link to="/learning-hub">Learning Hub</Link></li>
-            <li><Link to="/challenges">Challenges</Link></li>
-            <li><Link to="/rewards-shop">Rewards Shop</Link></li>
-            <li><Link to="/virtual-pet">Virtual Pet</Link></li>
-            <li><Link to="/dictionary">Financial Dictionary</Link></li>
-          </ul>
+            <li><Link to="/"><i className="fas fa-home"></i> Home</Link></li>
+            <li><Link to="/dashboard"><i className="fas fa-tachometer-alt"></i> Dashboard</Link></li>
+            <li><Link to="/learning-hub"><i className="fas fa-lightbulb"></i> Learning Hub</Link></li>
+            <li><Link to="/challenges"><i className="fas fa-tasks"></i> Challenges</Link></li>
+            <li><Link to="/rewards-shop"><i className="fas fa-store"></i> Rewards Shop</Link></li>
+            </ul>
         </nav>
         <h1>Learning Hub</h1>
         <h2>Explore and Learn: Build Your Financial Literacy</h2>

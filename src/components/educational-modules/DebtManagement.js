@@ -55,8 +55,6 @@ function DebtManagement() {
             <li><Link to="/debt-management"><i className="fa fa-hand-holding-usd"></i> Debt Management</Link></li>
             <li><Link to="/challenges"><i className="fa fa-tasks"></i> Challenges</Link></li>
             <li><Link to="/rewards-shop"><i className="fa fa-star"></i> Rewards Shop</Link></li>
-            <li><Link to="/virtual-pet"><i className="fa fa-paw"></i> Virtual Pet</Link></li>
-            <li><Link to="/dictionary"><i className="fa fa-book"></i> Financial Dictionary</Link></li>
           </ul>
         </nav>
         <h1>{lessons[currentLessonIndex].title}</h1>
