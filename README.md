@@ -8,7 +8,7 @@ This platform aims to provide users with educational resources on managing their
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/financial-literacy-platform.git
+   git clone https://github.com/amirabuhajer/financial-literacy-platform.git
    ```
 
 2. Navigate to the project directory:
