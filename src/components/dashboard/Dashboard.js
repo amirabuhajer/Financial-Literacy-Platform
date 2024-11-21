@@ -5,10 +5,12 @@ import { Pie } from 'react-chartjs-2';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import './Dashboard.css';
+import { useLocation } from 'react-router-dom';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function Dashboard() {
+  const location = useLocation();
   const [income, setIncome] = useState(0);
   const [savingsGoal, setSavingsGoal] = useState(0);
   const [expenses, setExpenses] = useState([]);

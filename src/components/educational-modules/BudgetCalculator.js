@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './UniversalFinancialStyles.css';
+import { useLocation } from 'react-router-dom';
 
 function BudgetCalculator() {
   const [monthlyIncome, setMonthlyIncome] = useState(0);
@@ -11,7 +12,7 @@ function BudgetCalculator() {
   const [otherExpenses, setOtherExpenses] = useState(0);
   const [totalExpenses, setTotalExpenses] = useState(0);
   const [balance, setBalance] = useState(0);
-
+  const location = useLocation();
   const calculateBudget = () => {
     const expenses = rent + utilities + groceries + transportation + savings + otherExpenses;
     setTotalExpenses(expenses);

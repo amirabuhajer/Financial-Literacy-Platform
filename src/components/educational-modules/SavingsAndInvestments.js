@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './SavingsAndInvestments.css';
 import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 
 function SavingsAndInvestments() {
+  const location = useLocation();
   const lessons = [
     {
       title: 'Introduction to Savings',

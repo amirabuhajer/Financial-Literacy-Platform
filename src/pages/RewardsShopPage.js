@@ -1,8 +1,11 @@
 // RewardsShopPage.js
 import React, { useState } from 'react';
 import './RewardsShopPage.css';
+import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function RewardsShopPage() {
+  const location = useLocation();
   const [points, setPoints] = useState(100);
   const [purchasedRewards, setPurchasedRewards] = useState([]);
 

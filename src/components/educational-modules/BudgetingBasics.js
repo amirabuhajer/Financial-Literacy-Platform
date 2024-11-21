@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './BudgetingBasics.css';
 import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 
 function BudgetingBasics() {
+  const location = useLocation();
   const lessons = [
     {
       title: 'Introduction to Budgeting',

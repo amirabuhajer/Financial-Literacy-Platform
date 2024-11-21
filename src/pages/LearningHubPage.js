@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './LearningHubPage.css';
 import { FaQuestionCircle, FaPlayCircle, FaTasks } from 'react-icons/fa';
+import { useLocation } from 'react-router-dom';
 
 function LearningHubPage() {
+  const location = useLocation();
   const [quizScore, setQuizScore] = useState(0);
   const [showQuiz, setShowQuiz] = useState({ budgeting: false, debt: false, savings: false });
   const [currentQuestion, setCurrentQuestion] = useState(0);

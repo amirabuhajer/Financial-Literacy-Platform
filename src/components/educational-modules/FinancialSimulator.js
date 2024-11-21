@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './FinancialSimulator.css';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -13,6 +14,8 @@ import {
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 ChartJS.register(
   CategoryScale,
@@ -25,6 +28,7 @@ ChartJS.register(
 );
 
 const FinancialSimulator = () => {
+  const location = useLocation();
   const [selectedYear, setSelectedYear] = useState(2021);
   const [endYear, setEndYear] = useState(2031);
   const [annualIncome, setAnnualIncome] = useState(0);
@@ -317,7 +321,39 @@ const financialResilienceInsights = () => {
 
   return (
     <div>
-      <h1>Financial Simulator</h1>
+      <header className="header">
+       <nav className="navbar">
+          <ul className="navbar-links">
+            <li>
+              <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
+                <i className="fas fa-home"></i> Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/dashboard" className={location.pathname === '/dashboard' ? 'active' : ''}>
+                <i className="fas fa-tachometer-alt"></i> Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link to="/learning-hub" className={location.pathname === '/learning-hub' ? 'active' : ''}>
+                <i className="fas fa-lightbulb"></i> Learning Hub
+              </Link>
+            </li>
+            <li>
+              <Link to="/challenges" className={location.pathname === '/challenges' ? 'active' : ''}>
+                <i className="fas fa-tasks"></i> Challenges
+              </Link>
+            </li>
+            <li>
+              <Link to="/financial-simulator" className={location.pathname === '/financial-simulator' ? 'active' : ''}>
+                <i className="MdCalculator"></i> Financial Simulator
+              </Link>
+            </li>
+            
+          </ul>
+        </nav>
+        <h1>Financial Simulator</h1>
+      </header>
       <div>
         <label>Annual Income: </label>
         <input
@@ -398,9 +434,7 @@ const financialResilienceInsights = () => {
           onChange={(e) => setMonthlyMortgage(parseFloat(e.target.value))}
         />
       </div>
-      // Button to start the financial simulation based on user inputs
 <button onClick={runSimulation}>Run Simulation</button>
-      // Button to add a financial event to the simulation
 <button onClick={addEvent}>Add Event</button>
       <button onClick={() => saveResultsAsFile('csv')}>Download Results as CSV</button>
       <button onClick={() => saveResultsAsFile('json')}>Download Results as JSON</button>

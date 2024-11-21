@@ -7,9 +7,13 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "chart.js": "^4.4.6",
+    "file-saver": "^2.0.5",
     "firebase": "^11.0.2",
     "framer-motion": "^11.11.17",
+    "html2canvas": "^1.4.1",
     "icons": "^1.0.0",
+    "jspdf": "^2.5.2",
+    "location": "^0.0.1",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
     "react-confetti": "^6.1.0",
@@ -42,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }
