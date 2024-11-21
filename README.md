@@ -40,25 +40,12 @@ If you are here for the graph, then head to `http://localhost:3000/financial-sim
 
 If you encounter errors like `Webpack compiled with 4 errors and 1 warning`, follow these steps:
 
-1. Run the following commands to install the necessary dependencies:
+Run the following commands to install the necessary dependencies:
    ```
    npm install html2canvas
    npm install file-saver
    npm install jspdf
    ```
-
-2. You might also see vulnerabilities in the output. To address all issues (including breaking changes), run:
-   ```
-   npm audit fix --force
-   ```
-
-   Note: Running `npm audit fix --force` may introduce breaking changes, so proceed with caution.
-
-## Known Issues
-
-- Some vulnerabilities may be present. Use `npm audit` to get more details.
-- Webpack might compile with errors or warnings; ensure all necessary dependencies are installed as mentioned above.
-
 ## License
 
 This project is licensed under the MIT License.
